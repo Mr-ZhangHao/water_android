@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="color_primary_text_highlight">#212122</color>
+    <color name="color_primary_item_normal">#ffffff</color>
+    <color name="color_primary_indicator_normal">#05020f</color>
+    <color name="color_primary_green_normal">#3BB97D</color>
+    <color name="color_primary_green_focusable">#16d477</color>
+    <color name="color_primary_btn_enable">#999999</color>
+    <color name="color_primary_item_focusable">#f2f7f7</color>
+
+<!--
+主要颜色
+-->
+    <color name="primaryBackLight">#1F2833</color>
+    <color name="primaryBackNormal">#1A212A</color>
+    <color name="primaryBackDark">#13161d</color>
+    <color name="primaryText">#e5e5e5</color>
+    <color name="primaryTextGray">#999999</color>
+    <color name="transparent">#00000000</color>
+    <color name="text_c5c5c5">#c5c5c5</color>
+
+    <!--颜色涨跌默认-->
+    <color name="typeGreen">#00b275</color>
+    <color name="typeRed">#f15057</color>
+    <color name="typeGray">#c5c8ce</color>
+    <!--  //TAB颜色-->
+    <color name="color_primary_tab_normal">#333333</color>
+    <color name="color_primary_tab_focusable">#4276FF</color>
+</resources>

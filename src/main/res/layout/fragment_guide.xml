@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/layoutBase"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <View
+                    android:id="@+id/indicator1"
+                    android:layout_width="@dimen/guide_indicator_size"
+                    android:layout_height="@dimen/guide_indicator_size"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_common_indicator"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <View
+                    android:id="@+id/indicator2"
+                    android:layout_width="@dimen/guide_indicator_size"
+                    android:layout_height="@dimen/guide_indicator_size"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_common_indicator"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <View
+                    android:id="@+id/indicator3"
+                    android:layout_width="@dimen/guide_indicator_size"
+                    android:layout_height="@dimen/guide_indicator_size"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_common_indicator"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="gone">
+
+                <View
+                    android:id="@+id/indicator4"
+                    android:layout_width="@dimen/guide_indicator_size"
+                    android:layout_height="@dimen/guide_indicator_size"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_common_indicator"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="gone">
+
+                <View
+                    android:id="@+id/indicator5"
+                    android:layout_width="@dimen/guide_indicator_size"
+                    android:layout_height="@dimen/guide_indicator_size"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_common_indicator"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="gone">
+
+                <View
+                    android:id="@+id/indicator6"
+                    android:layout_width="@dimen/guide_indicator_size"
+                    android:layout_height="@dimen/guide_indicator_size"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_common_indicator"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="gone">
+
+                <View
+                    android:id="@+id/indicator7"
+                    android:layout_width="@dimen/guide_indicator_size"
+                    android:layout_height="@dimen/guide_indicator_size"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_common_indicator"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</layout>
