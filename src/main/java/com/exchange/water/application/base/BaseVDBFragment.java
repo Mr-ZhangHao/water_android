@@ -55,7 +55,7 @@ public abstract class BaseVDBFragment<VDB extends ViewDataBinding> extends
         mDataBinding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false);
             onBind();
  //   if (isImmersionBarEnabled()) initImmersionBar();
-        StatusBarUtils.setStatusBarColor(getActivity(),R.color.primaryText);
+     StatusBarUtils.setStatusBarColor(getActivity(),R.color.primaryText);
         return attachToSwipeBack(mDataBinding.getRoot());
     }
 
@@ -79,7 +79,6 @@ public abstract class BaseVDBFragment<VDB extends ViewDataBinding> extends
 
     @Override
     public void onDestroy() {
-
         if (ExEventBus.getDefault().getDefaultEventBus().isRegistered(this)) {
             ExEventBus.getDefault().getDefaultEventBus().unregister(this);
         }

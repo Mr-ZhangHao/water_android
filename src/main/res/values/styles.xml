@@ -20,7 +20,7 @@
     </style>
 
     <style name="Common_Text_Toolbar_Small">
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@color/base_editText</item>
         <item name="android:textSize">@dimen/size_primary_toolbar_text_small</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -189,5 +189,35 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="rl_bind_account">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_marginLeft">@dimen/dp15</item>
+        <item name="android:layout_marginTop">@dimen/dp5</item>
+        <item name="android:layout_marginRight">@dimen/dp15</item>
+        <item name="android:layout_height">@dimen/dp90</item>
+    </style>
+
+    <style name="bind_account_img_add">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
+
+    <style name="ll_bind_account">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">@dimen/dp25</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="bing_account_tv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 </resources>

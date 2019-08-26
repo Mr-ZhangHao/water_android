@@ -10,7 +10,12 @@ import com.exchange.water.application.R;
 import com.exchange.water.application.base.BaseVDBFragment;
 import com.exchange.water.application.databinding.FragmentMainBinding;
 import com.exchange.water.application.databinding.FragmentMineBinding;
+import com.exchange.water.application.ui.user.bind_account.BindAccountFragment;
+import com.exchange.water.application.ui.user.bind_email.BindEmailFragment;
+import com.exchange.water.application.ui.user.contact_us.ContactUsFragment;
+import com.exchange.water.application.ui.user.credit.CreditFragment;
 import com.exchange.water.application.ui.user.login.LoginFragment;
+import com.exchange.water.application.ui.user.security.SecurityCenterFragment;
 import com.exchange.water.application.ui.user.signup.SignUpFragment;
 import com.exchange.water.application.utils.ExEventBus;
 import com.exchange.water.application.utils.WonderfulDpPxUtils;
@@ -62,12 +67,16 @@ public class MineFragment extends BaseVDBFragment <FragmentMineBinding>implement
                 break;
 
             case R.id.ll_Security_center:
+                ExEventBus.getDefault().startFragment(SecurityCenterFragment.newInstance());
 
                 break;
             case R.id.ll_Verified:
+                ExEventBus.getDefault().startFragment(CreditFragment.newInstance());
 
                 break;
             case R.id.ll_Payment_binding:
+                ExEventBus.getDefault().startFragment(BindAccountFragment.newInstance());
+
 
                 break;
             case R.id.ll_invite_friends:
@@ -80,7 +89,7 @@ public class MineFragment extends BaseVDBFragment <FragmentMineBinding>implement
 
                 break;
             case R.id.ll_contact_us:
-
+                ExEventBus.getDefault().startFragment(ContactUsFragment.newInstance());
                 break;
             case R.id.ll_WATER:
 

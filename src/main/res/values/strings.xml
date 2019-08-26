@@ -23,7 +23,9 @@
     <string name="exit_tips">再按一次退出</string>
     <string name="splash_text">water交易所</string>
     <string name="text_24_change">24h量</string>
-
+    <string name="loading">加载中...</string>
+    <string name="find_title_init">加载中</string>
+    <string name="find_select_browser">选择浏览器</string>
 
 
     <string name="select_country">选择国家或地区</string>
@@ -72,7 +74,7 @@
     <string name="signUp_Service">《服务条款》</string>
     <string name="signUp_Confirm">确认并注册</string>
     <string name="signUp_hint_code">请输入验证码</string>
-    <string name="signUp_hint_pwd_">密码为8-16位数字或字母组合</string>
+    <string name="signUp_hint_set_pwd">密码为8-16位数字或字母组合</string>
     <string name="signUp_hint_pwd">请输入密码</string>
     <string name="signUp_hint_Confirm_pwd">请再次输入密码</string>
     <string name="signUp_hint_check_pwd">请检查密码是否合法</string>
@@ -97,7 +99,6 @@
     <string name="mine_WATER">WATER</string>
     <string name="mine_login_or_registered">登录或注册</string>
     <!--安全中心-->
-
     <string name="Security_center_modify">修改</string>
     <string name="Security_center_Setting">设置</string>
     <string name="Security_center_bind">绑定</string>
@@ -105,6 +106,57 @@
     <string name="Security_center_modify_bingd_email">绑定邮箱</string>
     <string name="Security_center_modify_asset_pwd">资金密码</string>
     <string name="Security_center_modify_Google">Google验证</string>
+    <string name="bind_email">邮箱</string>
+    <string name="Modify_Login_password">修改登录密码</string>
+    <string name="set_asset_password">设置资金密码</string>
+    <string name="asset_password_hint">密码为6位纯数字</string>
+    <string name="old_login_password_hint">请输入旧密码</string>
+    <string name="old_asset_password_hint">请输入当前资金密码</string>
+    <!--支付绑定-->
+    <string name="bind_pay">支付绑定</string>
+    <string name="bind_pay_bank">银行卡</string>
+    <string name="bind_pay_ali">支付宝</string>
+    <string name="bind_pay_weichat">微信</string>
+    <string name="bind_pay_china_bank_account">中国银行</string>
+    <string name="bind_pay_ali_account">支付宝账号</string>
+    <string name="bind_pay_weichat_account">微信账号</string>
+    <string name="bind_pay_bank_account">银行账号</string>
+    <string name="bind_pay_asset_pwd_hint">资金密码</string>
+    <string name="bind_pay_name_hint">真实姓名</string>
+    <string name="bind_pay_bank_bank_hint">银行卡开户行</string>
+    <string name="bind_upload_ali_hint">点击上传支付宝二维码</string>
+    <string name="bind_upload_weichat_hint">点击上传微信二维码</string>
+    <string name="bind_confirm">确认绑定</string>
+    <string name="bind_bank_account">银行卡支付绑定</string>
+    <string name="bind_ali_account">支付宝支付绑定</string>
+    <string name="bind_weichat_account">微信支付绑定</string>
+    <!--实名认证-->
+    <string name="authentication">实名认证</string>
+    <string name="Submit_review">提交审核</string>
+    <string name="authentication_Country_hint">请选择您的国籍</string>
+    <string name="authentication_type_hint">请选择证件类型</string>
+    <string name="authentication_xing_hint">请输入您身份证的姓氏如：张</string>
+    <string name="authentication_ming_hint">请输入您身份证的名字如：三</string>
+    <string name="authentication_before_hint">点击上传身份证正面照（个人信息）</string>
+    <string name="authentication_after_hint">点击上传身份证背面照（国徽）</string>
+    <string name="authentication_hand_hint">点击上传手持身份证正面照</string>
+    <!--护照认证-->
+    <string name="authentication_passport_before_hint">点击上传护照封面（外部封面）</string>
+    <string name="authentication_passport_after_hint">点击上传护照信息面（内部信息）</string>
+    <!--驾驶证认证-->
+    <string name="authentication_driving_license_before_hint">点击上传驾照封面（外部封面）</string>
+    <string name="authentication_driving_license_after_hint">点击上传驾照信息面（内部信息）</string>
+
+    <string name="authentication_hint">上传要求:\n1.请.上传大小不超过5M的png,jpg,bmp格式的图片。\n2.请提供真实有效的本人证件,虚假认证可能会导致账\n户被冻结，由虚假认证产生的一切后果由用户负责!\n3.实名认证通过后不可修改！</string>
+    <string name="review_status_success">审核成功，</string>
+    <string name="review_status_success_hint">点击去交易</string>
+    <string name="review_status_fail">审核失败，</string>
+    <string name="review_status_fail_hint">点击重新上传</string>
+    <string name="review_status_pending">待审核…</string>
+    <!--联系我们-->
+    <string name="contact_us_email">waterio118@gmail.com</string>
+    <string name="contact_us_weichat">oisze_xtm</string>
+
 
 
 </resources>

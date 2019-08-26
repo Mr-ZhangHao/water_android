@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/primarybg"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:background="@color/primaryBackLight"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        style="@style/me_ll">
+
+        <ImageView
+            style="@style/me_ll_icon"
+            android:src="@mipmap/icon_me_aqzx" />
+
+        <TextView
+            style="@style/me_ll_text"
+            android:text="@string/contact_us_email" />
+
+        <FrameLayout style="@style/framelayout_line" />
+    </LinearLayout>
+    <View style="@style/Common_line" />
+        <LinearLayout
+            style="@style/me_ll">
+
+            <ImageView
+                style="@style/me_ll_icon"
+                android:src="@mipmap/icon_me_aqzx" />
+
+            <TextView
+                style="@style/me_ll_text"
+                android:text="@string/contact_us_weichat" />
+
+            <FrameLayout style="@style/framelayout_line" />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
+</layout>

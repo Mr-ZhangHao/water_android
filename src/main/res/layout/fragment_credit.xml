@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@color/primarybg"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:background="@color/primaryBackLight"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ll_country"
+                style="@style/common_user_rl">
+
+                <TextView
+                    android:id="@+id/tv_Country_hint"
+                    android:textColorHint="@color/base_hint"
+                    android:textColor="@color/base_editText"
+                    android:hint="@string/authentication_Country_hint"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/sp16"
+                    android:layout_width="wrap_content" />
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+                <ImageView
+                    android:id="@+id/img_select"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/icon_xiala"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_type"
+                style="@style/common_user_rl">
+                <TextView
+                    android:id="@+id/tv_type_hint"
+                    android:textColorHint="@color/base_hint"
+                    android:textColor="@color/base_editText"
+                    android:hint="@string/authentication_type_hint"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/sp16"
+                    android:layout_width="wrap_content" />
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+                <ImageView
+                    android:id="@+id/img_type"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/icon_xiala"
+                    />
+            </LinearLayout>
+
+            <LinearLayout style="@style/common_user_rl">
+
+                <EditText
+                    android:id="@+id/ed_xing"
+                    style="@style/common_edit_code"
+                    android:hint="@string/authentication_xing_hint" />
+
+            </LinearLayout>
+            <LinearLayout style="@style/common_user_rl">
+
+                <EditText
+                    android:id="@+id/ed_ming"
+                    style="@style/common_edit_code"
+                    android:hint="@string/authentication_ming_hint" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_next"
+            style="@style/common_btn_bg"
+            android:text="@string/signUp_Next_step" />
+    </LinearLayout>
+
+</layout>

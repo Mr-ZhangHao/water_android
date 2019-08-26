@@ -52,7 +52,7 @@ public abstract class   BaseVDBActivity<VDB extends ViewDataBinding> extends Sup
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+      getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         if (!ExEventBus.getDefault().getDefaultEventBus().isRegistered(this)) {
             ExEventBus.getDefault().getDefaultEventBus().register(this);

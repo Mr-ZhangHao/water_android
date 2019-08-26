@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@color/primarybg"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/ll_review_status"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:gravity="center_horizontal"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_marginTop="@dimen/dp200"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/review_status_pending"
+                    android:textSize="@dimen/sp18"
+                    android:textColor="@color/base_editText"
+                    />
+                <TextView
+                    android:id="@+id/tv_status_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/debug"
+                    android:visibility="gone"
+                    android:textColor="@color/primaryText"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_submit"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:background="@color/primaryBackLight"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/ll_upload_before"
+                style="@style/common_user_rl">
+
+                <TextView
+                    android:id="@+id/tv_before_hint"
+                    android:textColor="@color/primaryText"
+                    android:text="@string/authentication_before_hint"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/sp16"
+                    android:layout_width="wrap_content" />
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+                <ImageView
+                    android:id="@+id/img_before_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/bg_upload_code"
+                    android:visibility="gone"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_upload_after"
+                style="@style/common_user_rl">
+
+                <TextView
+                    android:id="@+id/tv_after_hint"
+                    android:textColor="@color/primaryText"
+                    android:text="@string/authentication_after_hint"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/sp16"
+                    android:layout_width="wrap_content" />
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+                <ImageView
+                    android:id="@+id/img_after_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/bg_upload_code"
+                    android:visibility="gone"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_upload_hand"
+                style="@style/common_user_rl">
+
+                <TextView
+                    android:id="@+id/tv_hand_hint"
+                    android:textColor="@color/primaryText"
+                    android:text="@string/authentication_hand_hint"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/sp16"
+                    android:layout_width="wrap_content" />
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+                <ImageView
+                    android:id="@+id/img_hand_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/bg_upload_code"
+                    android:visibility="gone"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:textColor="@color/base_hint"
+            android:text="@string/authentication_hint"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp30"
+            android:layout_marginTop="@dimen/dp10"
+            android:textSize="@dimen/sp14"
+            android:layout_width="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_submit"
+            style="@style/common_btn_bg"
+            android:text="@string/Submit_review" />
+    </LinearLayout>
+
+</layout>

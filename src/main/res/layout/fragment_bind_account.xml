@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@color/primarybg"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/dp15"
+            android:layout_marginTop="@dimen/dp22"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="@dimen/dp20"
+                android:layout_height="@dimen/dp20"
+                android:src="@mipmap/icon_bank"
+                />
+            <TextView
+                style="@style/bing_account_tv"
+                android:text="@string/bind_pay_bank"
+                android:layout_marginLeft="@dimen/dp5"
+                android:textColor="@color/base_editText"
+                />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:background="@mipmap/bank_bg"
+            style="@style/rl_bind_account">
+            <ImageView
+                android:id="@+id/img_bank_add"
+                android:src="@mipmap/icon_add"
+                style="@style/bind_account_img_add" />
+            <LinearLayout
+                android:id="@+id/ll_bank"
+                android:visibility="gone"
+                style="@style/ll_bind_account">
+                <TextView
+                    android:text="@string/bind_pay_china_bank_account"
+                    style="@style/bing_account_tv" />
+                <TextView
+                    android:id="@+id/tv_bank_num"
+                    style="@style/bing_account_tv"
+                    android:text="@string/debug"
+                    />
+            </LinearLayout>
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/dp15"
+            android:layout_marginTop="@dimen/dp22"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="@dimen/dp20"
+                android:layout_height="@dimen/dp20"
+                android:src="@mipmap/icon_alipay"
+                />
+            <TextView
+                style="@style/bing_account_tv"
+                android:text="@string/bind_pay_ali"
+                android:layout_marginLeft="@dimen/dp5"
+                android:textColor="@color/base_editText"
+                />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:background="@mipmap/alipay_bg"
+            style="@style/rl_bind_account">
+            <ImageView
+                android:id="@+id/img_ali_add"
+                android:src="@mipmap/icon_add"
+                style="@style/bind_account_img_add" />
+            <LinearLayout
+                android:id="@+id/ll_ali"
+                android:visibility="gone"
+                style="@style/ll_bind_account">
+                <TextView
+                    android:text="@string/bind_pay_ali_account"
+                    style="@style/bing_account_tv" />
+                <TextView
+                    android:id="@+id/tv_ali_num"
+                    style="@style/bing_account_tv"
+                    android:text="@string/debug"
+                    />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/dp15"
+            android:layout_marginTop="@dimen/dp22"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="@dimen/dp20"
+                android:layout_height="@dimen/dp20"
+                android:src="@mipmap/icon_weichat"
+                />
+            <TextView
+                style="@style/bing_account_tv"
+                android:text="@string/bind_pay_weichat"
+                android:layout_marginLeft="@dimen/dp5"
+                android:textColor="@color/base_editText"
+                />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:background="@mipmap/weichat_bg"
+            style="@style/rl_bind_account">
+            <ImageView
+                android:id="@+id/img_weichat_add"
+                android:src="@mipmap/icon_add"
+                style="@style/bind_account_img_add" />
+            <LinearLayout
+                android:id="@+id/ll_weichat"
+                android:visibility="gone"
+                style="@style/ll_bind_account">
+                <TextView
+                    android:text="@string/bind_pay_weichat_account"
+                    style="@style/bing_account_tv" />
+                <TextView
+                    android:id="@+id/tv_weichat_num"
+                    style="@style/bing_account_tv"
+                    android:text="@string/debug"
+                    />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>

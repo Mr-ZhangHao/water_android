@@ -342,7 +342,7 @@ public class LoginFragment extends BaseVDBFragment<FragmentLoginBinding> impleme
         WonderfulToastUtils.showToast(data.getMsg());
         final String editAccount = mDataBinding.editAccount.getEditableText().toString();
         final String edLoginPwd = mDataBinding.edLoginPwd.getEditableText().toString();
-      //  presenter.login(editAccount,edLoginPwd,data.getMsg());
+     presenter.login(editAccount,edLoginPwd,data.getMsg());
     }
 
     @Override

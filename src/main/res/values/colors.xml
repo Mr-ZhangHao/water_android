@@ -21,15 +21,17 @@
     <color name="primaryBackNormal">#399E8A</color>
     <color name="primaryBackDark">#ffffff</color>
     <color name="primaryText">#399E8A</color>
-    <color name="primarybg">#F2F6FA</color>
+        <color name="primarybg">#F2F6FA</color>
     <color name="primaryTextGray">#999999</color>
     <color name="transparent">#00000000</color>
     <color name="base_editText">#333333</color>
+    <color name="title_Text">#333333</color>
     <color name="base_btnText">#FFFFFF</color>
     <color name="base_line">#D3DEE4</color>
     <color name="base_hint">#D3DEE4</color>
     <color name="base_btn_bg">#399e8a</color>
     <color name="base_btn_bg_no">#D3DEE4</color>
+    <color name="white">#FFFFFF</color>
 <!--    //edit选中背景-->
     <color name="edit_select_bg">#24C0A2</color>
     <!--颜色涨跌默认-->

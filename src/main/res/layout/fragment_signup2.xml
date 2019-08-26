@@ -41,7 +41,7 @@
                   android:id="@+id/ed_signUp_pwd"
                 style="@style/common_edit_code"
             android:inputType="textPassword"
-            android:hint="@string/signUp_hint_pwd_" />
+            android:hint="@string/signUp_hint_set_pwd" />
 
             <CheckBox
                 android:id="@+id/img_is_invisible"

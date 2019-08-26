@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@color/primarybg"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:background="@color/primaryBackLight"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_height="wrap_content">
+
+
+            <RelativeLayout style="@style/common_user_rl">
+                <EditText
+                    android:id="@+id/ed_asset_pwd"
+                    style="@style/common_edit_code"
+                    android:inputType="numberPassword"
+                    android:hint="@string/bind_pay_asset_pwd_hint" />
+
+                <CheckBox
+                    android:id="@+id/img_is_invisible"
+                    android:button="@color/chart_white"
+                    style="@style/common_check_pwd" />
+
+            </RelativeLayout>
+            <LinearLayout style="@style/common_user_rl">
+
+                <EditText
+                    android:id="@+id/ed_name"
+                    style="@style/common_edit_code"
+                    android:hint="@string/bind_pay_name_hint" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/common_user_rl">
+
+                <EditText
+                    android:id="@+id/ed_account"
+                    style="@style/common_edit_code"
+                    android:hint="@string/bind_pay_weichat_account" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/upload"
+                style="@style/common_user_rl">
+
+                <TextView
+                    android:id="@+id/tv_upload_hint"
+                    android:textColor="@color/primaryText"
+                    android:text="@string/bind_upload_weichat_hint"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/sp16"
+                    android:layout_width="wrap_content" />
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+                <ImageView
+                    android:id="@+id/img_upload_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/bg_upload_code"
+                    android:visibility="gone"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_confirm"
+            style="@style/common_btn_bg"
+            android:text="@string/bind_confirm" />
+    </LinearLayout>
+</layout>

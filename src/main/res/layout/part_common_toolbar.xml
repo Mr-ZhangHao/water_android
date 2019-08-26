@@ -18,9 +18,11 @@
             android:layout_width="wrap_content"
             android:layout_height="?attr/actionBarSize"
             android:layout_below="@+id/viewSpace"
-            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dimens_primary_padding"
             android:orientation="horizontal"
-            android:paddingLeft="@dimen/dimens_primary_padding">
+   >
 
             <TextView
                 android:id="@+id/textBack"
@@ -30,11 +32,10 @@
 
             <ImageView
                 android:id="@+id/imageBack"
-                android:layout_width="wrap_content"
+                android:layout_width="20dp"
                 android:layout_height="@dimen/dimens_primary_list_image_size"
-                android:paddingRight="@dimen/dimens_primary_normal_margin"
                 android:scaleType="center"
-                android:src="@mipmap/back_fff" />
+                android:src="@mipmap/back_333" />
         </LinearLayout>
 
         <LinearLayout
@@ -43,7 +44,8 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_below="@+id/viewSpace"
             android:layout_centerInParent="true"
-            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
@@ -68,6 +70,7 @@
             android:layout_below="@+id/viewSpace"
             android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:layout_centerVertical="true"
             android:paddingRight="@dimen/dimens_primary_padding"
             android:visibility="gone">
 
