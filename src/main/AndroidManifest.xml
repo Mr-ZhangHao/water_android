@@ -27,6 +27,7 @@
             android:theme="@style/AppThemeFullScreen"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateUnspecified|adjustPan"
+
             >
 
         </activity>

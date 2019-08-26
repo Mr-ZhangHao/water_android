@@ -15,6 +15,7 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -25,7 +26,10 @@ import android.widget.Toast;
 
 import com.exchange.water.application.R;
 import com.exchange.water.application.utils.ExEventBus;
+import com.exchange.water.application.utils.StatusBarUtils;
+import com.exchange.water.application.utils.WonderfulKeyboardUtils;
 import com.gyf.barlibrary.ImmersionBar;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 
 import org.greenrobot.eventbus.Subscribe;
@@ -41,6 +45,9 @@ public abstract class   BaseVDBActivity<VDB extends ViewDataBinding> extends Sup
     private Handler mHandler = new Handler(Looper.getMainLooper());
     protected VDB mDataBinding;
     protected ImmersionBar         immersionBar;
+    private PopupWindow loadingPopup;
+    protected boolean isNeedhide = true;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,7 +59,8 @@ public abstract class   BaseVDBActivity<VDB extends ViewDataBinding> extends Sup
         }
         //这一行注意！看本文最后的说明！！！！
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        if (isImmersionBarEnabled()) initImmersionBar();
+    // if (isImmersionBarEnabled()) initImmersionBar();
+        initLoadingPopup();
 
         mDataBinding = DataBindingUtil.setContentView(this, getLayoutRes());
 
@@ -63,6 +71,7 @@ public abstract class   BaseVDBActivity<VDB extends ViewDataBinding> extends Sup
             parentView.setFitsSystemWindows(false);
         }
         onBind(mDataBinding);
+
 
     }
 
@@ -159,6 +168,52 @@ public abstract class   BaseVDBActivity<VDB extends ViewDataBinding> extends Sup
         }
         super.onDestroy();
         if (immersionBar != null) immersionBar.destroy();
+        hideLoadingPopup();
+    }
+
+    /**
+     * 初始化加载dialog
+     */
+    private void initLoadingPopup() {
+        View loadingView = getLayoutInflater().inflate(R.layout.pop_loading, null);
+        loadingPopup = new PopupWindow(loadingView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        loadingPopup.setFocusable(true);
+        loadingPopup.setClippingEnabled(false);
+        loadingPopup.setBackgroundDrawable(new ColorDrawable());
+    }
+
+    /**
+     * 显示加载框
+     */
+    public void displayLoadingPopup() {
+        loadingPopup.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+    }
+
+    /**
+     * 隐藏加载框
+     */
+    public void hideLoadingPopup() {
+        if (loadingPopup != null) {
+            loadingPopup.dismiss();
+        }
+    }
+
+    /**
+     * 处理软件盘智能弹出和隐藏
+     */
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                View view = getCurrentFocus();
+                if (isNeedhide) {
+                    WonderfulKeyboardUtils.editKeyboard(ev, view, this);
+                }
+                break;
+            default:
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
     }
 
 

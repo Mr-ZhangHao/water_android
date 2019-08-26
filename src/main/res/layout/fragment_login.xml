@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/layoutBase"
+
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/cancel"
+            android:text="@string/signUp_cancel"
+            style="@style/common_cancel" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:scrollbars="none"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp30"
+                    android:layout_marginTop="@dimen/dp50"
+                    android:text="@string/login_Phone"
+                    android:textColor="@color/base_editText"
+                    android:textSize="28sp" />
+
+
+                <RelativeLayout
+                    android:id="@+id/select_country"
+                    style="@style/common_user_rl"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/dp30"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true">
+
+                        <TextView
+                            android:id="@+id/tv_country"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/signUp_china"
+                            android:textColor="@color/base_editText"
+                            android:textSize="@dimen/sp16" />
+                        <TextView
+                            android:id="@+id/tv_area"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/signUp_china_area"
+                            android:textColor="@color/base_editText"
+                            android:textSize="@dimen/sp16" />
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:id="@+id/img_select"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/icon_xiala" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/base_line" />
+                </RelativeLayout>
+
+                <com.exchange.water.application.utils.widget.ClearEditTextView
+                    android:id="@+id/edit_account"
+                    style="@style/common_user_rl"
+                    android:hint="@string/signUp_phone_number"
+                    android:inputType="phone"
+                    android:textColor="@color/base_editText"
+                    android:layout_marginTop="@dimen/dp50"
+                    android:textColorHint="@color/base_hint"
+                    android:theme="@style/MyEditText"
+                    android:textSize="@dimen/sp16" />
+
+                <RelativeLayout style="@style/common_user_rl">
+                    <EditText
+                        android:id="@+id/ed_login_pwd"
+                        style="@style/common_edit_code"
+                        android:inputType="textPassword"
+                        android:hint="@string/signUp_hint_pwd" />
+
+                    <CheckBox
+                        android:id="@+id/img_is_invisible"
+                        android:button="@color/chart_white"
+                        style="@style/common_check_pwd" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    style="@style/common_user_rl"
+                    android:gravity="center_vertical"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/ed_code"
+                        style="@style/common_edit_code"
+                        android:hint="@string/signUp_hint_code" />
+
+                    <TextView
+                        android:id="@+id/tv_yzm"
+                        android:text="@string/signUp_get_code"
+                        style="@style/common_tv_code" />
+
+                </RelativeLayout>
+                <Button
+                    android:id="@+id/btn_login"
+                    style="@style/common_btn_bg"
+                    android:text="@string/login_text" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="@dimen/dp30"
+                    android:layout_marginRight="@dimen/dp30"
+                    android:layout_marginTop="@dimen/dp15"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/login_Email"
+                        android:textColor="@color/primaryText"
+                        android:textSize="@dimen/sp14" />
+                    <TextView
+                        android:id="@+id/forgot_password"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/forgot_password"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/primaryText"
+                        android:textSize="@dimen/sp14" />
+                </RelativeLayout>
+
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp30"
+                    android:layout_marginBottom="@dimen/dp20">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp30"
+                        android:layout_marginTop="@dimen/dp15"
+                        android:text="@string/login_no_account"
+                        android:textColor="@color/base_hint"
+                        android:textSize="@dimen/sp16" />
+
+                    <TextView
+                        android:id="@+id/tv_go_register"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp15"
+                        android:text="@string/login_Go_register"
+                        android:textColor="@color/primaryText"
+                        android:textSize="@dimen/sp16" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>

@@ -189,6 +189,8 @@ public class HomeFragment extends BaseTitleFragment<FragmentHomeBinding> impleme
         this.mPresenter=presenter;
     }
 
+
+
     @Override
     public void setPresenter(CommonPresenter presenter) {
         this.commonPresenter = presenter;

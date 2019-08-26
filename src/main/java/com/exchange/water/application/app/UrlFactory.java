@@ -69,16 +69,27 @@ public class UrlFactory {
 
     //手机注册验证码
     public static String getPhoneCodeUrl() {
-        return host + "/uc/mobile/code";
+        return host + "/m/mail";
+    }  //手机注册验证码
+
+    public static String getcaptchaImge() {
+        return host + "/captcha/captchaImage";
+    }
+
+    public static String getcaptcha() {
+        return host + "/captcha/checkCaptcha";
+    }
+    public static String getCheckCaptcha() {
+        return host + "/ypCheckCaptcha";
     }
 
     //手机注册
     public static String getSignUpByPhone() {
-        return host + "/uc/register/phone";
+        return host + "m/member";
     }
     //邮箱注册
     public static String getSignUpByEmail() {
-        return host + "/uc/register/email";
+        return host + "m/member";
     }
     //登录
     public static String getLoginUrl() {
@@ -136,7 +147,7 @@ public class UrlFactory {
     }
     //全部国家
     public static String getCountryUrl() {
-        return host + "/uc/support/country";
+        return host + "/m/nationality";
     }
     //发布广告
     public static String getReleaseAdUrl() {

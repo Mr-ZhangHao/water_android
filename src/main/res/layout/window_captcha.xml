@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:layout_height="match_parent">
+
+        <com.luozm.captcha.Captcha
+            android:id="@+id/captCha"
+            android:layout_width="330dp"
+            app:mode="mode_bar"
+            app:blockSize="60dp"
+            app:max_fail_count="1000"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</layout>

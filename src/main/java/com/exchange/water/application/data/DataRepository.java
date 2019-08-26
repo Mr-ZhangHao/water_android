@@ -26,22 +26,40 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public void signUpByPhone(String phone, String username, String password, String country, String code,String tuijianma,String challenge, String validate, String seccode, DataCallback dataCallback) {
-        if (isLocal) mLocalDataSource.signUpByPhone(phone, username, password, country, code,tuijianma,challenge,validate,seccode, dataCallback);
-        else mRemoteDataSource.signUpByPhone(phone, username, password, country, code,tuijianma, challenge,validate,seccode,dataCallback);
+    public void captcha1(DataCallback dataCallback) {
+        if (isLocal) mLocalDataSource.captcha1(dataCallback);
+        else mRemoteDataSource.captcha1(dataCallback);
     }
 
     @Override
-    public void signUpByEmail(String email, String username, String password, String country, String challenge, String validate, String seccode,String tuijian2, DataCallback dataCallback) {
+    public void captcha2(String point, String randomId, DataCallback dataCallback) {
+        if (isLocal) mLocalDataSource.captcha2(point,randomId,dataCallback);
+        else mRemoteDataSource.captcha2(point,randomId,dataCallback);
+    }
+
+    @Override
+    public void YPcaptcha(String token, String authenticate, DataCallback dataCallback) {
+        if (isLocal) mLocalDataSource.YPcaptcha(token,authenticate,dataCallback);
+        else mRemoteDataSource.YPcaptcha(token,authenticate,dataCallback);
+    }
+
+    @Override
+    public void signUpByPhone(String mAreacode,String mAccount, String password, String mCode,String tuijianma, DataCallback dataCallback) {
+        if (isLocal) mLocalDataSource.signUpByPhone(mAreacode,mAccount, password, mCode,tuijianma,dataCallback);
+        else mRemoteDataSource.signUpByPhone(mAreacode,mAccount, password, mCode,tuijianma,dataCallback);
+    }
+
+    @Override
+    public void signUpByEmail(String mAccount, String password, String mCode,String tuijianma, DataCallback dataCallback) {
         if (isLocal)
-            mLocalDataSource.signUpByEmail(email, username, password, country, challenge, validate, seccode,tuijian2, dataCallback);
-        else mRemoteDataSource.signUpByEmail(email, username, password, country, challenge, validate, seccode,tuijian2, dataCallback);
+            mLocalDataSource.signUpByEmail(mAccount, password, mCode,tuijianma, dataCallback);
+        else mRemoteDataSource.signUpByEmail(mAccount, password, mCode,tuijianma,dataCallback);
     }
 
     @Override
-    public void login(String username, String password, String challenge, String validate, String seccode, DataCallback dataCallback) {
-        if (isLocal) mLocalDataSource.login(username, password, challenge, validate, seccode, dataCallback);
-        else mRemoteDataSource.login(username, password, challenge, validate, seccode, dataCallback);
+    public void login(String username, String password, String seccode,  DataCallback dataCallback) {
+        if (isLocal) mLocalDataSource.login(username, password, seccode, dataCallback);
+        else mRemoteDataSource.login(username, password, seccode, dataCallback);
     }
 
 
@@ -304,17 +322,17 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public void phoneForgotCode(String phone, String challenge, String validate, String seccode, DataCallback dataCallback) {
+    public void phoneForgotCode(String phone, String mAreacode, DataCallback dataCallback) {
         if (isLocal)
-            mLocalDataSource.phoneForgotCode(phone, challenge, validate, seccode, dataCallback);
+            mLocalDataSource.phoneForgotCode(phone, mAreacode,  dataCallback);
         else
-            mRemoteDataSource.phoneForgotCode(phone, challenge, validate, seccode, dataCallback);
+            mRemoteDataSource.phoneForgotCode(phone, mAreacode,  dataCallback);
     }
 
     @Override
-    public void forgotPwd(String account, String code, String mode, String password, DataCallback dataCallback) {
-        if (isLocal) mLocalDataSource.forgotPwd(account, code, mode, password, dataCallback);
-        else mRemoteDataSource.forgotPwd(account, code, mode, password, dataCallback);
+    public void forgotPwd(String account, String code, String mAreacode, String password, DataCallback dataCallback) {
+        if (isLocal) mLocalDataSource.forgotPwd(account, code, mAreacode, password, dataCallback);
+        else mRemoteDataSource.forgotPwd(account, code, mAreacode, password, dataCallback);
     }
 
     @Override

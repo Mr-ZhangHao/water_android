@@ -51,6 +51,7 @@ public class ExEventBus {
     public static class MessageEvent {
 
         public static final int EVENT_TYPE_JUMP_TRADE = 1;
+        public static final int EVENT_TYPE_FORCE_UPDATE = 2;
 
 
 
@@ -100,6 +101,9 @@ public class ExEventBus {
 
         public static final int REQUEST_CODE_NORMAL                 = -1;
         public static final int REQUEST_PERMISSION_EXTERNAL_STORAGE = 1;
+        public static final int REQUEST_CODE_SELECTE_COUNTRY = 2;
+        public static final int REQUEST_CODE_REGISTER = 3;
+        public static final int REQUEST_CODE_SELECTE_OUT_LOGIN = 4;
 
         private SupportFragment fragment;
 

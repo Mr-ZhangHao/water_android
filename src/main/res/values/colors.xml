@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimaryDark">#24C0A2</color>
+    <color name="colorAccent">#24C0A2</color>
+
 
 
     <color name="color_primary_text_highlight">#212122</color>
@@ -16,19 +17,29 @@
 <!--
 主要颜色
 -->
-    <color name="primaryBackLight">#1F2833</color>
-    <color name="primaryBackNormal">#1A212A</color>
-    <color name="primaryBackDark">#13161d</color>
-    <color name="primaryText">#e5e5e5</color>
+    <color name="primaryBackLight">#ffffff</color>
+    <color name="primaryBackNormal">#399E8A</color>
+    <color name="primaryBackDark">#ffffff</color>
+    <color name="primaryText">#399E8A</color>
+    <color name="primarybg">#F2F6FA</color>
     <color name="primaryTextGray">#999999</color>
     <color name="transparent">#00000000</color>
-    <color name="text_c5c5c5">#c5c5c5</color>
-
+    <color name="base_editText">#333333</color>
+    <color name="base_btnText">#FFFFFF</color>
+    <color name="base_line">#D3DEE4</color>
+    <color name="base_hint">#D3DEE4</color>
+    <color name="base_btn_bg">#399e8a</color>
+    <color name="base_btn_bg_no">#D3DEE4</color>
+<!--    //edit选中背景-->
+    <color name="edit_select_bg">#24C0A2</color>
     <!--颜色涨跌默认-->
     <color name="typeGreen">#00b275</color>
     <color name="typeRed">#f15057</color>
     <color name="typeGray">#c5c8ce</color>
     <!--  //TAB颜色-->
-    <color name="color_primary_tab_normal">#333333</color>
-    <color name="color_primary_tab_focusable">#4276FF</color>
+    <color name="color_primary_tab_normal">#D3DEE4</color>
+    <color name="color_primary_tab_focusable">#399E8A</color>
+    <!--注册-->
+    <color name="signUp_cancel">#D3DEE4</color>
+
 </resources>

@@ -4,9 +4,9 @@
     <string name="debug_num">0</string>
     <string name="main_text_home">首页</string>
     <string name="main_text_Quotes">行情</string>
-    <string name="main_text_Coin">币币</string>
+    <string name="main_text_Coin">交易</string>
     <string name="main_text_mine">我的</string>
-    <string name="main_text_Legal_currency">法币</string>
+    <string name="main_text_asset">资产</string>
 
     <string name="home_list_text_Rising">涨幅榜</string>
     <string name="home_list_text_Trading">成交额榜</string>
@@ -19,10 +19,92 @@
     <string name="parse_error">解析异常</string>
     <string name="login_invalid">登录失效，请重新登录！</string>
     <string name="no_data">暂无数据</string>
-
     <string name="start_exp">立即体验</string>
     <string name="exit_tips">再按一次退出</string>
     <string name="splash_text">water交易所</string>
     <string name="text_24_change">24h量</string>
+
+
+
+    <string name="select_country">选择国家或地区</string>
+
+    <!--登录-->
+    <string name="login_text">登录</string>
+    <string name="login_regist">注册</string>
+    <string name="login_phone_number">手机号</string>
+    <string name="login_phone_number_hint">请输入手机号</string>
+    <string name="login_password">密码</string>
+    <string name="login_password_hint">请输入密码</string>
+    <string name="forgot_password">忘记密码？</string>
+    <string name="login_no_account">还没有帐号?</string>
+    <string name="login_Go_register">去注册</string>
+    <string name="login_Phone">手机登录</string>
+    <string name="login_Email">邮箱登录</string>
+    <string name="login_check">账户或密码不正确</string>
+
+    <!--注册-->
+    <string name="signUp_cancel">取消</string>
+    <string name="signUp_china">中国</string>
+    <string name="signUp_china_area_">+</string>
+    <string name="signUp_china_area">+86</string>
+    <string name="signUp_Phone">手机注册</string>
+    <string name="signUp_Email">邮箱注册</string>
+    <string name="signUp_Verification_code">验证码</string>
+    <string name="signUp_phone_number">手机号</string>
+    <string name="signUp_Email_number">邮箱</string>
+    <string name="signUp_Next_step">下一步</string>
+    <string name="signUp_Existing_account">已有账号？</string>
+    <string name="signUp_Go_login">去登陆</string>
+    <string name="signUp_account_empty_hint">账户不能为空</string>
+    <string name="signUp_phone_illegal_hint">请输入正确手机号</string>
+    <string name="signUp_email_illegal_hint">请输入正确邮箱号</string>
+    <string name="signUp_imgcode_empty_hint">图片验证码不能为空</string>
+    <string name="signUp_code_empty_hint">验证码不能为空</string>
+    <string name="signUp_pwd_empty_hint">密码不能为空</string>
+    <string name="signUp_imgcode_illegal_hint">图片验证码不正确</string>
+    <string name="send_code">发送验证码</string>
+    <string name="re_send">重新获取</string>
+
+    <!--设置密码-->
+    <string name="signUp_set_password">设置密码</string>
+    <string name="signUp_get_code">获取验证码</string>
+    <string name="signUp_consent">注册即表示同意</string>
+    <string name="signUp_Service">《服务条款》</string>
+    <string name="signUp_Confirm">确认并注册</string>
+    <string name="signUp_hint_code">请输入验证码</string>
+    <string name="signUp_hint_pwd_">密码为8-16位数字或字母组合</string>
+    <string name="signUp_hint_pwd">请输入密码</string>
+    <string name="signUp_hint_Confirm_pwd">请再次输入密码</string>
+    <string name="signUp_hint_check_pwd">请检查密码是否合法</string>
+    <string name="signUp_hint_pwd_contrast">两次密码不一致</string>
+    <string name="signUp_hint_Invitation_code">邀请码（非必填）</string>
+
+    <!--忘记密码-->
+    <string name="forget_set_password">重置密码</string>
+    <string name="forget_password">忘记密码</string>
+    <string name="forget_phone_Mobile">手机找回</string>
+    <string name="forget_email_Mobile">邮箱找回</string>
+    <string name="forget_Confirm">确认</string>
+
+    <!--我的-->
+    <string name="mine_Security_center">安全中心</string>
+    <string name="mine_Verified">实名认证</string>
+    <string name="mine_Payment_binding">支付绑定</string>
+    <string name="mine_invite_friends">邀请好友</string>
+    <string name="mine_Platform_announcement">平台公告</string>
+    <string name="mine_Help_center">帮助中心</string>
+    <string name="mine_contact_us">联系我们</string>
+    <string name="mine_WATER">WATER</string>
+    <string name="mine_login_or_registered">登录或注册</string>
+    <!--安全中心-->
+
+    <string name="Security_center_modify">修改</string>
+    <string name="Security_center_Setting">设置</string>
+    <string name="Security_center_bind">绑定</string>
+    <string name="Security_center_login_password">登录密码</string>
+    <string name="Security_center_modify_bingd_email">绑定邮箱</string>
+    <string name="Security_center_modify_asset_pwd">资金密码</string>
+    <string name="Security_center_modify_Google">Google验证</string>
+
 
 </resources>

@@ -1,6 +1,7 @@
 package com.exchange.water.application.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 /**
  * Created by Administrator on 2017/8/29.
@@ -21,5 +22,17 @@ public class WonderfulDpPxUtils {
     public static int px2dip(Context context, float pxValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
+    }
+
+    /**
+     * 获取状态栏高度
+     * @param context
+     * @return
+     */
+    public static int getStatusBarHeight(Context context) {
+        Resources resources = context.getResources();
+        int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
+        int height = resources.getDimensionPixelSize(resourceId);
+        return height;
     }
 }

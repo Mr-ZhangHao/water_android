@@ -22,16 +22,17 @@ public class HomePresenter implements MainUIContract.HomePresenter {
 
     @Override
     public void banners() {
+        view.displayLoadingPopup();
         dataRepository.banners( new DataSource.DataCallback() {
             @Override
             public void onDataLoaded(Object obj) {
-                view.hideLoadingPopup();
+             view.hideLoadingPopup();
                 view.bannersSuccess((List<BannerEntity>) obj);
             }
 
             @Override
             public void onDataNotAvailable(Integer code, String toastMessage) {
-                view.hideLoadingPopup();
+               view.hideLoadingPopup();
                 view.bannersFail(code, toastMessage);
 
             }

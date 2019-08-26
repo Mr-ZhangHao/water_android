@@ -12,13 +12,16 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.PopupWindow;
 
 
 import com.exchange.water.application.R;
 import com.exchange.water.application.utils.ExEventBus;
+import com.exchange.water.application.utils.StatusBarUtils;
 import com.exchange.water.application.utils.WonderfulLogUtils;
 import com.gyf.barlibrary.ImmersionBar;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 
 import org.greenrobot.eventbus.Subscribe;
@@ -34,7 +37,7 @@ public abstract class BaseVDBFragment<VDB extends ViewDataBinding> extends
     private Handler mHandler = new Handler(Looper.getMainLooper());
     protected boolean isAlive = true;
     private static final int INVALID_VAL = -1;//顶部颜色默认值
-
+    private SystemBarTintManager tintManager;//状态栏管理器
     protected abstract void onBind();
     protected ImmersionBar immersionBar;
     private PopupWindow loadingPopup;
@@ -51,9 +54,8 @@ public abstract class BaseVDBFragment<VDB extends ViewDataBinding> extends
         registerListener();
         mDataBinding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false);
             onBind();
-        if (isImmersionBarEnabled()) initImmersionBar();
-        initLoadingPopup();
-
+ //   if (isImmersionBarEnabled()) initImmersionBar();
+        StatusBarUtils.setStatusBarColor(getActivity(),R.color.primaryText);
         return attachToSwipeBack(mDataBinding.getRoot());
     }
 
@@ -61,7 +63,7 @@ public abstract class BaseVDBFragment<VDB extends ViewDataBinding> extends
 
     protected void initImmersionBar() {
         immersionBar = ImmersionBar.with(this);
-        //immersionBar.keyboardEnable(false, WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN).statusBarDarkFont(false,0.2f).flymeOSStatusBarFontColor(R.color.help_view).init();
+       immersionBar.keyboardEnable(false, WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN).statusBarDarkFont(false,0.2f).flymeOSStatusBarFontColor(R.color.help_view).init();
     }
     public void updateUI(Runnable runnable) {
         if (runnable != null) {
@@ -159,31 +161,18 @@ public abstract class BaseVDBFragment<VDB extends ViewDataBinding> extends
             if (immersionBar != null) initImmersionBar();
         }
     }
-    /**
-     * 初始化加载dialog
-     */
-    private void initLoadingPopup() {
-        View loadingView = getLayoutInflater().inflate(R.layout.pop_loading, null);
-        loadingPopup = new PopupWindow(loadingView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        loadingPopup.setFocusable(true);
-        loadingPopup.setClippingEnabled(false);
-        loadingPopup.setBackgroundDrawable(new ColorDrawable());
-    }
+
 
     /**
      * 显示加载框
      */
     public void displayLoadingPopup() {
-        loadingPopup.showAtLocation(getActivity().getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+        if (getActivity() != null) ((BaseVDBActivity) getActivity()).displayLoadingPopup();
+
     }
 
-    /**
-     * 隐藏加载框
-     */
     public void hideLoadingPopup() {
-        if (loadingPopup != null) {
-            loadingPopup.dismiss();
-        }
+        if (getActivity() != null) ((BaseVDBActivity) getActivity()).hideLoadingPopup();
     }
 
 
@@ -200,4 +189,27 @@ public abstract class BaseVDBFragment<VDB extends ViewDataBinding> extends
         }
         return result;
     }
+    /**
+     * 设置沉浸式状态栏
+     *
+     * @param res 背景资源
+     */
+    public void setStatusBar(int res) {
+        if (tintManager == null)
+            tintManager = new SystemBarTintManager(getmActivity());
+        // 激活状态栏
+        tintManager.setStatusBarTintEnabled(true);
+        // enable navigation bar tint 激活导航栏
+        //        tintManager.setNavigationBarTintEnabled(true);
+        //设置系统栏设置颜色
+     // tintManager.setTintColor(R.color.primaryText);
+        //给状态栏设置颜色
+        if (res != INVALID_VAL) {
+         tintManager.setStatusBarTintResource(res);
+            //Apply the specified drawable or color resource to the system navigation bar.
+            //给导航栏设置资源
+        tintManager.setNavigationBarTintResource(res);
+        }
+    }
+
 }

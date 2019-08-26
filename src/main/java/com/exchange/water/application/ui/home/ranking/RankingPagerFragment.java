@@ -62,7 +62,7 @@ public class RankingPagerFragment extends BaseVDBFragment<FragmentRankingPagerBi
 
         }
 
-        mPresenter.allCurrency();
+    //    mPresenter.allCurrency();
         initRvContent();
 
 
@@ -108,6 +108,7 @@ public class RankingPagerFragment extends BaseVDBFragment<FragmentRankingPagerBi
     public void setPresenter(MainUIContract.RankingPresenter presenter) {
         this.mPresenter=presenter;
     }
+
 
 
 }

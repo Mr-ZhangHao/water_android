@@ -26,22 +26,38 @@ public class LocalDataSource implements DataSource {
 
 
     @Override
-    public void phoneCode(String phone, String country, DataCallback dataCallback) {
+    public void phoneCode(String phone,String mAreacode,  DataCallback dataCallback) {
 
     }
 
     @Override
-    public void signUpByPhone(String phone, String username, String password, String country, String code,String tuijianma,String challenge, String validate, String seccode, DataCallback dataCallback) {
+    public void captcha1(DataCallback dataCallback) {
 
     }
 
     @Override
-    public void signUpByEmail(String email, String username, String password, String country, String challenge, String validate, String seccode,String tuijian2, DataCallback dataCallback) {
+    public void captcha2(String point, String randomId, DataCallback dataCallback) {
 
     }
 
     @Override
-    public void login(String username, String password, String challenge, String validate, String seccode, DataCallback dataCallback) {
+    public void YPcaptcha(String token, String authenticate, DataCallback dataCallback) {
+
+    }
+
+    @Override
+    public void signUpByPhone(String mAreacode,String mAccount, String password, String mCode,String tuijianma,  DataCallback dataCallback) {
+
+    }
+
+    @Override
+    public void signUpByEmail(String mAccount, String password, String mCode,String tuijianma,  DataCallback dataCallback) {
+
+    }
+
+    @Override
+    public void login(String username, String password,
+                      String seccode, DataCallback dataCallback) {
 
     }
 
@@ -247,12 +263,12 @@ public class LocalDataSource implements DataSource {
     }
 
     @Override
-    public void phoneForgotCode(String phone, String challenge, String validate, String seccode, DataCallback dataCallback) {
+    public void phoneForgotCode(String phone, String mAreacode, DataCallback dataCallback) {
 
     }
 
     @Override
-    public void forgotPwd(String account, String code, String mode, String password, DataCallback dataCallback) {
+    public void forgotPwd(String account, String code, String mAreacode, String password, DataCallback dataCallback) {
 
     }
 

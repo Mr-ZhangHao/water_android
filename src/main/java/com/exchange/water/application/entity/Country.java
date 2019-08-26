@@ -7,58 +7,78 @@ import java.io.Serializable;
  */
 
 public class Country implements Serializable {
-    private String zhName;
-    private String enName;
-    private String areaCode;
-    private String language;
-    private String sort;
-    private String localCurrency;
 
-    public String getZhName() {
-        return zhName;
+    /**
+     * id : 1
+     * name : 中国
+     * coding : zh-cn
+     * area : +86
+     * img_url : https://waterio.oss-cn-hongkong.aliyuncs.com/wateriovn/flags/zh-cn.png
+     * create_time : 2019-05-05 17:36:21.0
+     * update_time : 2019-05-05 17:37:35.0
+     */
+
+    private int id;
+    private String name;
+    private String coding;
+    private String area;
+    private String img_url;
+    private String create_time;
+    private String update_time;
+
+    public int getId() {
+        return id;
     }
 
-    public void setZhName(String zhName) {
-        this.zhName = zhName;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getEnName() {
-        return enName;
+    public String getName() {
+        return name;
     }
 
-    public void setEnName(String enName) {
-        this.enName = enName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getAreaCode() {
-        return areaCode;
+    public String getCoding() {
+        return coding;
     }
 
-    public void setAreaCode(String areaCode) {
-        this.areaCode = areaCode;
+    public void setCoding(String coding) {
+        this.coding = coding;
     }
 
-    public String getLanguage() {
-        return language;
+    public String getArea() {
+        return area;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
+    public void setArea(String area) {
+        this.area = area;
     }
 
-    public String getSort() {
-        return sort;
+    public String getImg_url() {
+        return img_url;
     }
 
-    public void setSort(String sort) {
-        this.sort = sort;
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
     }
 
-    public String getLocalCurrency() {
-        return localCurrency;
+    public String getCreate_time() {
+        return create_time;
     }
 
-    public void setLocalCurrency(String localCurrency) {
-        this.localCurrency = localCurrency;
+    public void setCreate_time(String create_time) {
+        this.create_time = create_time;
+    }
+
+    public String getUpdate_time() {
+        return update_time;
+    }
+
+    public void setUpdate_time(String update_time) {
+        this.update_time = update_time;
     }
 }

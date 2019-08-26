@@ -16,6 +16,7 @@
             android:id="@+id/tabHost"
             android:layout_width="match_parent"
             android:layout_height="54dp"
+            android:background="@mipmap/icon_tab_bg"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal">
 
@@ -34,7 +35,7 @@
                     android:layout_width="@dimen/fragment_home_indicator_img_size"
                     android:layout_height="@dimen/fragment_home_indicator_img_size"
                     android:scaleType="center"
-                    android:src="@drawable/img_main_indicator_wallet" />
+                    android:src="@drawable/img_main_indicator_home" />
 
                 <TextView
                     android:id="@+id/textIndicatorWallet"
@@ -90,7 +91,7 @@
                     android:layout_width="@dimen/fragment_home_indicator_img_size"
                     android:layout_height="@dimen/fragment_home_indicator_img_size"
                     android:scaleType="center"
-                    android:src="@drawable/img_main_indicator_wallet" />
+                    android:src="@drawable/img_main_indicator_trading" />
 
                 <TextView
                     android:id="@+id/textIndicatorThird"
@@ -125,7 +126,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/activity_home_indicator_text_top_margin"
-                    android:text="@string/main_text_Legal_currency"
+                    android:text="@string/main_text_asset"
                     android:textColor="@drawable/color_main_indicator_text"
                     android:textSize="@dimen/fragment_home_indicator_text_size" />
 
@@ -146,7 +147,7 @@
                     android:layout_width="@dimen/fragment_home_indicator_img_size"
                     android:layout_height="@dimen/fragment_home_indicator_img_size"
                     android:scaleType="center"
-                    android:src="@drawable/img_main_indicator_wallet" />
+                    android:src="@drawable/img_main_indicator_mine" />
 
                 <TextView
                     android:id="@+id/textIndicatorMe"

@@ -1,11 +1,249 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-    <android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:id="@+id/layoutBase"
-        android:background="@color/chart_ma20"
-        android:layout_height="match_parent">
 
-    </android.support.constraint.ConstraintLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/layoutBase"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primarybg"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/status_bar"
+            android:layout_width="match_parent"
+                android:orientation="horizontal"
+               android:layout_height="wrap_content">
+            </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_goto_login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp100"
+            android:background="@color/primaryBackLight"
+            android:gravity="center_vertical">
+
+            <com.exchange.water.application.customview.CircleImageView
+                android:id="@+id/img_head_portrait"
+                android:layout_width="@dimen/dp60"
+                android:layout_height="@dimen/dp60"
+                android:src="@mipmap/icon_tx"
+                android:layout_marginLeft="@dimen/dp20" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp10"
+                android:text="@string/mine_login_or_registered"
+                android:textColor="@color/base_editText"
+                android:textSize="@dimen/sp18"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+
+                android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_marginLeft="@dimen/dp20"
+            android:layout_marginRight="@dimen/dp20"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_Security_center"
+                style="@style/me_ll">
+
+                <ImageView
+                    style="@style/me_ll_icon"
+                    android:src="@mipmap/icon_me_aqzx" />
+
+                <TextView
+                    style="@style/me_ll_text"
+                    android:text="@string/mine_Security_center" />
+
+                <FrameLayout style="@style/framelayout_line" />
+
+                <ImageView
+                    style="@style/common_arrow"
+                    android:src="@mipmap/icon_right_arrow" />
+
+            </LinearLayout>
+
+            <View style="@style/Common_line" />
+
+            <LinearLayout
+                android:id="@+id/ll_Verified"
+                style="@style/me_ll">
+
+                <ImageView
+                    style="@style/me_ll_icon"
+                    android:src="@mipmap/icon_me_smrz" />
+
+                <TextView
+                    style="@style/me_ll_text"
+                    android:text="@string/mine_Verified" />
+
+                <FrameLayout style="@style/framelayout_line" />
+
+                <ImageView
+                    style="@style/common_arrow"
+                    android:src="@mipmap/icon_right_arrow" />
+
+            </LinearLayout>
+
+            <View style="@style/Common_line" />
+
+            <LinearLayout
+                android:id="@+id/ll_Payment_binding"
+                style="@style/me_ll">
+
+                <ImageView
+                    style="@style/me_ll_icon"
+                    android:src="@mipmap/icon_me_pay" />
+
+                <TextView
+                    style="@style/me_ll_text"
+                    android:text="@string/mine_Payment_binding" />
+
+                <FrameLayout style="@style/framelayout_line" />
+
+                <ImageView
+                    style="@style/common_arrow"
+                    android:src="@mipmap/icon_right_arrow" />
+
+            </LinearLayout>
+
+            <View style="@style/Common_line" />
+
+            <LinearLayout
+                android:id="@+id/ll_invite_friends"
+                style="@style/me_ll">
+
+                <ImageView
+                    style="@style/me_ll_icon"
+                    android:src="@mipmap/icon_me_yqhy" />
+
+                <TextView
+                    style="@style/me_ll_text"
+                    android:text="@string/mine_invite_friends" />
+
+                <FrameLayout style="@style/framelayout_line" />
+
+                <ImageView
+                    style="@style/common_arrow"
+                    android:src="@mipmap/icon_right_arrow" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_marginLeft="@dimen/dp20"
+            android:layout_marginRight="@dimen/dp20"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_Platform_announcement"
+                style="@style/me_ll">
+
+                <ImageView
+                    style="@style/me_ll_icon"
+                    android:src="@mipmap/icon_me_gonggao" />
+
+                <TextView
+                    style="@style/me_ll_text"
+                    android:text="@string/mine_Platform_announcement" />
+
+                <FrameLayout style="@style/framelayout_line" />
+
+                <ImageView
+                    style="@style/common_arrow"
+                    android:src="@mipmap/icon_right_arrow" />
+
+            </LinearLayout>
+
+            <View style="@style/Common_line" />
+
+            <LinearLayout
+                android:id="@+id/ll_Help_center"
+                style="@style/me_ll">
+
+                <ImageView
+                    style="@style/me_ll_icon"
+                    android:src="@mipmap/icon_me_help" />
+
+                <TextView
+                    style="@style/me_ll_text"
+                    android:text="@string/mine_Help_center" />
+
+                <FrameLayout style="@style/framelayout_line" />
+
+                <ImageView
+                    style="@style/common_arrow"
+                    android:src="@mipmap/icon_right_arrow" />
+
+            </LinearLayout>
+
+            <View style="@style/Common_line" />
+
+            <LinearLayout
+                android:id="@+id/ll_contact_us"
+                style="@style/me_ll">
+
+                <ImageView
+                    style="@style/me_ll_icon"
+                    android:src="@mipmap/icon_me_lxus" />
+
+                <TextView
+                    style="@style/me_ll_text"
+                    android:text="@string/mine_contact_us" />
+
+                <FrameLayout style="@style/framelayout_line" />
+
+                <ImageView
+                    style="@style/common_arrow"
+                    android:src="@mipmap/icon_right_arrow" />
+
+            </LinearLayout>
+
+            <View style="@style/Common_line" />
+
+            <LinearLayout
+                android:id="@+id/ll_WATER"
+                style="@style/me_ll">
+
+                <ImageView
+                    style="@style/me_ll_icon"
+                    android:src="@mipmap/icon_me_water" />
+
+                <TextView
+                    style="@style/me_ll_text"
+                    android:text="@string/mine_WATER" />
+
+                <FrameLayout style="@style/framelayout_line" />
+
+                <ImageView
+                    style="@style/common_arrow"
+                    android:src="@mipmap/icon_right_arrow" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
 </layout>

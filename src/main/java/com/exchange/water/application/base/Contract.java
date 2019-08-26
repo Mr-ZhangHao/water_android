@@ -1,5 +1,7 @@
 package com.exchange.water.application.base;
 
+import android.view.View;
+
 /**
  * Created by Administrator on 2017/9/25.
  */
@@ -12,7 +14,7 @@ public interface Contract {
     interface BaseView<T> {
         void setPresenter(T presenter);
         void hideLoadingPopup();
-        void displayLoadingPopup();
+       void displayLoadingPopup();
 
     }
 }

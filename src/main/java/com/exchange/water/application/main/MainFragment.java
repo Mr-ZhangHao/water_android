@@ -19,7 +19,10 @@ import com.exchange.water.application.ui.home.HomeFragment;
 import com.exchange.water.application.ui.home.MarketFragment;
 import com.exchange.water.application.ui.home.MineFragment;
 import com.exchange.water.application.ui.home.TradingFragment;
+import com.exchange.water.application.ui.user.login.LoginFragment;
 import com.exchange.water.application.utils.ExEventBus;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import me.yokeyword.fragmentation.SupportFragment;
 
@@ -77,18 +80,18 @@ public class MainFragment extends BaseVDBFragment<FragmentMainBinding> implement
 
     }
 
-
-/*    @Subscribe
+/*
+    @Subscribe
     public void onEvent(ExEventBus.MessageFragment event) {
         if (event != null) {
             SupportFragment fragment = event.getFragment();
             if (fragment != null) {
-                if (fragment instanceof LoginPWDFragment) {
-                    LoginPWDFragment loginFragment = findFragment(LoginPWDFragment.class);
+                if (fragment instanceof LoginFragment) {
+                    LoginFragment loginFragment = findFragment(LoginFragment.class);
                     if (loginFragment == null) {
-                        startWithPop(LoginPWDFragment.newInstance());
+                        startWithPop(LoginFragment.newInstance());
                     } else {
-                        popTo(LoginPWDFragment.class, false);
+                        popTo(LoginFragment.class, false);
                     }
                 } else {
                     startForResult(fragment, event.getRequestCode());
@@ -275,13 +278,8 @@ public class MainFragment extends BaseVDBFragment<FragmentMainBinding> implement
 
     }
 
-    @Override
-    public void hideLoadingPopup() {
 
-    }
 
-    @Override
-    public void displayLoadingPopup() {
 
-    }
+
 }

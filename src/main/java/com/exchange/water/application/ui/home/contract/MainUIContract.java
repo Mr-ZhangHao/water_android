@@ -27,6 +27,7 @@ public interface MainUIContract {
         void bannersSuccess(List<BannerEntity> obj);
 
         void bannersFail(Integer code, String toastMessage);
+
     }
 
     /*
@@ -45,7 +46,15 @@ public interface MainUIContract {
         void allCurrencyFail(Integer code, String toastMessage);
 
     }
+/*
+* 行情
+* */
+interface MarketPresenter extends Contract.BasePresenter {
 
+}
 
+    interface MarketView extends Contract.BaseView<MarketPresenter> {
+
+    }
 
 }

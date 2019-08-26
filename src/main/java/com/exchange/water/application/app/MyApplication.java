@@ -16,6 +16,7 @@ import com.exchange.water.application.utils.WonderfulFileUtils;
 import com.exchange.water.application.utils.WonderfulLogUtils;
 import com.exchange.water.application.utils.WonderfulStringUtils;
 import com.exchange.water.application.utils.WonderfulToastUtils;
+import com.qipeng.capatcha.QPCapatcha;
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 
@@ -89,6 +90,9 @@ public class MyApplication extends Application {
                 .debug(true)
                 .install();
 
+        //云片验证
+        QPCapatcha.getInstance().init(this, "862653aa0b0c42f3a941c190b0441478");
+
 
      //   UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "");
     }
@@ -144,7 +148,7 @@ public class MyApplication extends Application {
     public void loginAgain(BaseActivity activity) {
         setCurrentUser(null);
         WonderfulFileUtils.getLongSaveFile(this, "User", "user.info").delete();
-        activity.startActivityForResult(new Intent(activity, LoginActivity.class), LoginActivity.RETURN_LOGIN);
+        activity.startActivityForResult(new Intent(activity, LoginFragment.class), LoginFragment.RETURN_LOGIN);
     }
 
     */
@@ -155,7 +159,7 @@ public class MyApplication extends Application {
     public void loginAgain(Fragment fragment) {
         setCurrentUser(null);
         WonderfulFileUtils.getLongSaveFile(this, "User", "user.info").delete();
-        fragment.startActivityForResult(new Intent(fragment.getActivity(), LoginActivity.class), LoginActivity.RETURN_LOGIN);
+        fragment.startActivityForResult(new Intent(fragment.getActivity(), LoginFragment.class), LoginFragment.RETURN_LOGIN);
     }
 */
 

@@ -14,6 +14,7 @@ import com.exchange.water.application.entity.User;
 import com.exchange.water.application.ui.home.HomeFragment;
 import com.exchange.water.application.ui.home.contract.MainUIContract;
 import com.exchange.water.application.ui.home.presenter.HomePresenter;
+import com.exchange.water.application.ui.user.login.LoginFragment;
 import com.exchange.water.application.utils.ExEventBus;
 import com.exchange.water.application.utils.SharedPreferenceInstance;
 import com.exchange.water.application.utils.WonderfulToastUtils;
@@ -57,25 +58,24 @@ public class MainActivity extends BaseVDBActivity {
         if (event != null) {
             SupportFragment fragment = event.getFragment();
             if (fragment != null) {
-               /* if (fragment instanceof LoginPWDFragment) {
-                    LoginPWDFragment loginFragment = findFragment(LoginPWDFragment.class);
+                if (fragment instanceof LoginFragment) {
+                    LoginFragment loginFragment = findFragment(LoginFragment.class);
                     if (loginFragment == null) {
-                        startWithPop(LoginPWDFragment.newInstance());
+                        startWithPop(LoginFragment.newInstance());
                     } else {
-                        popTo(LoginPWDFragment.class, false);
+                        popTo(LoginFragment.class, false);
                     }
                 } else {
                     startForResult(fragment, event.getRequestCode());
-                }*/
-                startForResult(fragment, event.getRequestCode());
-
+                }
+             //   startForResult(fragment, event.getRequestCode());
             }
         }
     }
 
     @Override
     public void onBackPressedSupport() {
-        if (getTopFragment() instanceof MainFragment) {
+        if (getTopFragment() instanceof MainFragment||getTopFragment() instanceof LoginFragment) {
 
             exitApp();
 
@@ -104,7 +104,14 @@ public class MainActivity extends BaseVDBActivity {
         }
         mLastBackTime = current;
     }
+    @Override
+    public void onEvent(ExEventBus.MessageEvent event) {
+        super.onEvent(event);
 
+        if(event.getType() == ExEventBus.MessageEvent.EVENT_TYPE_FORCE_UPDATE) {
+            finish();
+        }
+    }
     public void finishActivity() {
     finish();
     }

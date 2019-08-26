@@ -6,13 +6,16 @@ package com.exchange.water.application.data;
 
 public interface DataSource {
 
-    void phoneCode(String phone, String country, DataCallback dataCallback);
+    void phoneCode(String phone, String mAreacode, DataCallback dataCallback);
+    void captcha1( DataCallback dataCallback);
+    void captcha2(String point , String randomId , DataCallback dataCallback);
+    void YPcaptcha(String token , String authenticate , DataCallback dataCallback);
 
-    void signUpByPhone(String phone, String username, String password, String country, String code, String tuijianma, String challenge, String validate, String seccode, DataCallback dataCallback);
+    void signUpByPhone(String mAreacode,String mAccount, String password, String mCode,String tuijianma, DataCallback dataCallback);
 
-    void signUpByEmail(String email, String username, String password, String country, String challenge, String validate, String seccode, String tuijian2, DataCallback dataCallback);
+    void signUpByEmail(String mAccount, String password, String mCode,String tuijianma, DataCallback dataCallback);
 
-    void login(String username, String password, String challenge, String validate, String seccode, DataCallback dataCallback);
+    void login(String username, String password, String seccode, DataCallback dataCallback);
 
     void KData(String symbol, Long from, Long to, String resolution, DataCallback dataCallback);
 
@@ -94,9 +97,9 @@ public interface DataSource {
 
     void cancleEntrust(String token, String orderId, DataCallback dataCallback);
 
-    void phoneForgotCode(String phone, String challenge, String validate, String seccode, DataCallback dataCallback);
+    void phoneForgotCode(String phone, String mAreacode, DataCallback dataCallback);
 
-    void forgotPwd(String account, String code, String mode, String password, DataCallback dataCallback);
+    void forgotPwd(String account, String code, String mAreacode, String password, DataCallback dataCallback);
 
     void emailForgotCode(String phone, String challenge, String validate, String seccode, DataCallback dataCallback);
 

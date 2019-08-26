@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/cancel"
+            style="@style/common_cancel"
+            android:text="@string/signUp_cancel" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp30"
+            android:layout_marginTop="@dimen/dp50"
+            android:text="@string/forget_set_password"
+            android:textColor="@color/base_editText"
+            android:textSize="28sp" />
+
+
+        <RelativeLayout style="@style/common_user_rl"
+            android:layout_marginTop="@dimen/dp30"
+            >
+            <EditText
+                android:id="@+id/ed_signUp_pwd"
+                style="@style/common_edit_code"
+                android:inputType="textPassword"
+                android:hint="@string/signUp_hint_pwd_" />
+
+            <CheckBox
+                android:id="@+id/img_is_invisible"
+                android:button="@color/chart_white"
+                style="@style/common_check_pwd" />
+
+        </RelativeLayout>
+        <RelativeLayout style="@style/common_user_rl">
+
+            <EditText
+                android:id="@+id/ed_signUp_Confirm_pwd"
+                style="@style/common_edit_code"
+                android:inputType="textPassword"
+                android:hint="@string/signUp_hint_Confirm_pwd" />
+
+            <CheckBox
+                android:id="@+id/img_is_invisible2"
+                android:button="@color/chart_white"
+                style="@style/common_check_pwd" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_Confirm"
+            android:layout_marginTop="@dimen/dp50"
+            android:text="@string/forget_Confirm"
+            style="@style/common_btn_bg"/>
+    </LinearLayout>
+</layout>
