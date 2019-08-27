@@ -63,7 +63,7 @@
                     android:layout_width="@dimen/fragment_home_indicator_img_size"
                     android:layout_height="@dimen/fragment_home_indicator_img_size"
                     android:scaleType="center"
-                    android:src="@drawable/img_main_indicator_wallet" />
+                    android:src="@drawable/img_main_indicator_marke" />
 
                 <TextView
                     android:id="@+id/textIndicatorDiscover"

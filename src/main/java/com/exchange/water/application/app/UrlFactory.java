@@ -80,20 +80,20 @@ public class UrlFactory {
         return host + "/captcha/checkCaptcha";
     }
     public static String getCheckCaptcha() {
-        return host + "/ypCheckCaptcha";
+        return host + "/captcha/ypCheckCaptcha";
     }
 
     //手机注册
     public static String getSignUpByPhone() {
-        return host + "m/member";
+        return host + "/m/member";
     }
     //邮箱注册
     public static String getSignUpByEmail() {
-        return host + "m/member";
+        return host + "/m/member";
     }
     //登录
     public static String getLoginUrl() {
-        return host + "/uc/login";
+        return host + "/m/app/login";
     }
     //k线数据
     public static String getKDataUrl() {

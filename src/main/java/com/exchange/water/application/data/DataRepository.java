@@ -20,9 +20,9 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public void phoneCode(String phone, String country, DataCallback dataCallback) {
-        if (isLocal) mLocalDataSource.phoneCode(phone, country, dataCallback);
-        else mRemoteDataSource.phoneCode(phone, country, dataCallback);
+    public void phoneCode(String phone, String country,String  check_code, DataCallback dataCallback) {
+        if (isLocal) mLocalDataSource.phoneCode(phone, country, check_code,dataCallback);
+        else mRemoteDataSource.phoneCode(phone, country,check_code ,dataCallback);
     }
 
     @Override

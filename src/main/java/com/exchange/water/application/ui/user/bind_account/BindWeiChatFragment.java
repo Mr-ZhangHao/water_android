@@ -36,7 +36,12 @@ public class BindWeiChatFragment extends BaseTitleFragment<FragmentWeichatAccoun
         mDataBinding.btnConfirm.setOnClickListener(this);
         mDataBinding.upload.setOnClickListener(this);
         mDataBinding.imgIsInvisible.setOnClickListener(this);
-        YunpianCaptchaUtils.getInstance(getContext()).setCaptchaWindowListener(this);
+        YunpianCaptchaUtils.getInstance().setCaptchaWindowListener(this);
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        YunpianCaptchaUtils.getInstance().onDestroy();
     }
 
     @Override
@@ -61,7 +66,7 @@ public class BindWeiChatFragment extends BaseTitleFragment<FragmentWeichatAccoun
 
             case R.id.btn_confirm:
 
-                YunpianCaptchaUtils.getInstance(getContext()).start(getActivity());
+                YunpianCaptchaUtils.getInstance().start(getActivity());
 
                 break;
 
@@ -103,7 +108,7 @@ public class BindWeiChatFragment extends BaseTitleFragment<FragmentWeichatAccoun
     }
 
     @Override
-    public void onCaptchaSuccess(YPCaptcha data) {
+    public void onCaptchaSuccess(String data) {
 
     }
 

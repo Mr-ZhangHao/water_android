@@ -6,6 +6,7 @@ package com.exchange.water.application.utils.okhttp.post;
 import com.exchange.water.application.app.MyApplication;
 import com.exchange.water.application.utils.EncryUtils;
 import com.exchange.water.application.utils.SharedPreferenceInstance;
+import com.exchange.water.application.utils.WonderfulLogUtils;
 import com.exchange.water.application.utils.okhttp.RequestBuilder;
 import com.exchange.water.application.utils.okhttp.RequestCall;
 
@@ -47,6 +48,8 @@ public class PostFormBuilder extends RequestBuilder {
         addHeader("access-auth-token", token);
         return new PostFormRequest(url, params, headers, files).build();
     }
+
+
 
     ///IdentityHashMap  与 hashMap
     @Override

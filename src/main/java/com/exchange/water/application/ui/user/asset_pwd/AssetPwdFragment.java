@@ -28,7 +28,7 @@ public class AssetPwdFragment extends BaseTitleFragment<FragmentAssetPwdBinding>
     @Override
     protected void onBind() {
         initTitle(R.string.set_asset_password);
-        YunpianCaptchaUtils.getInstance(getContext()).setCaptchaWindowListener(this);
+        YunpianCaptchaUtils.getInstance().setCaptchaWindowListener(this);
         new AssetPwdPresenter(Injection.provideTasksRepository(getContext()), this);
 
         mDataBinding.btnConfirm.setOnClickListener(this);
@@ -57,7 +57,7 @@ public class AssetPwdFragment extends BaseTitleFragment<FragmentAssetPwdBinding>
                 break;
             case R.id.btn_confirm:
 
-                YunpianCaptchaUtils.getInstance(getContext()).start(getActivity());
+                YunpianCaptchaUtils.getInstance().start(getActivity());
 
                 break;
 
@@ -65,7 +65,7 @@ public class AssetPwdFragment extends BaseTitleFragment<FragmentAssetPwdBinding>
     }
 
     @Override
-    public void onCaptchaSuccess(YPCaptcha data) {
+    public void onCaptchaSuccess(String data) {
 
     }
 

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@color/primarybg"
+        android:layout_height="match_parent">
+    <LinearLayout style="@style/ll_common_white">
+        <LinearLayout
+            android:id="@+id/ll_submit_order"
+            android:layout_marginLeft="@dimen/dp20"
+            style="@style/me_ll">
+            <TextView
+                style="@style/me_ll_text"
+                android:text="@string/Help_submit_order" />
+
+            <FrameLayout style="@style/framelayout_line" />
+
+            <ImageView
+                style="@style/common_arrow"
+                android:src="@mipmap/icon_right_arrow" />
+
+        </LinearLayout>
+
+        <View style="@style/Common_line" />
+        <LinearLayout
+            android:id="@+id/ll_privacy_protection"
+            android:layout_marginLeft="@dimen/dp20"
+            style="@style/me_ll">
+            <TextView
+                style="@style/me_ll_text"
+                android:text="@string/Help_privacy_protection" />
+
+            <FrameLayout style="@style/framelayout_line" />
+
+            <ImageView
+                style="@style/common_arrow"
+                android:src="@mipmap/icon_right_arrow" />
+
+        </LinearLayout>
+
+        <View style="@style/Common_line" />
+        <LinearLayout
+            android:id="@+id/ll_about_us"
+
+            android:layout_marginLeft="@dimen/dp20"
+            style="@style/me_ll">
+            <TextView
+                style="@style/me_ll_text"
+                android:text="@string/Help_about_us" />
+
+            <FrameLayout style="@style/framelayout_line" />
+
+            <ImageView
+                style="@style/common_arrow"
+                android:src="@mipmap/icon_right_arrow" />
+
+        </LinearLayout>
+
+        <View style="@style/Common_line" />
+        <LinearLayout
+            android:id="@+id/ll_terms_service"
+
+            android:layout_marginLeft="@dimen/dp20"
+            style="@style/me_ll">
+            <TextView
+                style="@style/me_ll_text"
+                android:text="@string/Help_terms_service" />
+
+            <FrameLayout style="@style/framelayout_line" />
+
+            <ImageView
+                style="@style/common_arrow"
+                android:src="@mipmap/icon_right_arrow" />
+
+        </LinearLayout>
+
+        <View style="@style/Common_line" />
+        <LinearLayout
+            android:id="@+id/ll_disclaimer"
+            android:layout_marginLeft="@dimen/dp20"
+            style="@style/me_ll">
+            <TextView
+                style="@style/me_ll_text"
+                android:text="@string/Help_disclaimer" />
+
+            <FrameLayout style="@style/framelayout_line" />
+
+            <ImageView
+                style="@style/common_arrow"
+                android:src="@mipmap/icon_right_arrow" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    </LinearLayout>
+
+</layout>

@@ -32,7 +32,7 @@ public class ModifyLoginPwdFragment extends BaseTitleFragment<FragmentModifyPwdB
     @Override
     protected void onBind() {
         initTitle(R.string.Modify_Login_password);
-        YunpianCaptchaUtils.getInstance(getContext()).setCaptchaWindowListener(this);
+        YunpianCaptchaUtils.getInstance().setCaptchaWindowListener(this);
         new ModifyLoginPwdPresenter(Injection.provideTasksRepository(getContext()), this);
 
           mDataBinding.btnConfirm.setOnClickListener(this);
@@ -65,12 +65,18 @@ public class ModifyLoginPwdFragment extends BaseTitleFragment<FragmentModifyPwdB
                 break;
             case R.id.btn_confirm:
 
-                YunpianCaptchaUtils.getInstance(getContext()).start(getActivity());
+                YunpianCaptchaUtils.getInstance().start(getActivity());
 
                 break;
 
         }
     }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        YunpianCaptchaUtils.getInstance().onDestroy();
+    }
+
     @Override
     public void setPresenter(ModifyLoginPwdContract.Presenter presenter) {
         this.presenter = presenter;
@@ -96,7 +102,7 @@ public class ModifyLoginPwdFragment extends BaseTitleFragment<FragmentModifyPwdB
     }
 
     @Override
-    public void onCaptchaSuccess(YPCaptcha data) {
+    public void onCaptchaSuccess(String data) {
 
     }
 

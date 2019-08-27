@@ -16,6 +16,8 @@ import com.exchange.water.application.app.Injection;
 import com.exchange.water.application.base.BaseVDBFragment;
 import com.exchange.water.application.databinding.FragmentSignup2Binding;
 import com.exchange.water.application.entity.YPCaptcha;
+import com.exchange.water.application.main.MainFragment;
+import com.exchange.water.application.ui.user.login.LoginFragment;
 import com.exchange.water.application.ui.user.login.LoginPresenter;
 import com.exchange.water.application.utils.ExEventBus;
 import com.exchange.water.application.utils.StrUtil;
@@ -68,6 +70,8 @@ public class SignUpFragment2 extends BaseVDBFragment <FragmentSignup2Binding> im
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams)mDataBinding.cancel.getLayoutParams();
         layoutParams.height = statusBarHeight;
         mDataBinding.cancel.setLayoutParams(layoutParams);
+
+        YunpianCaptchaUtils.getInstance().setCaptchaWindowListener(this);
     }
 
     @Override
@@ -112,7 +116,7 @@ public class SignUpFragment2 extends BaseVDBFragment <FragmentSignup2Binding> im
         switch (view.getId()) {
 
             case R.id.tv_yzm:
-                sendCode();
+                YunpianCaptchaUtils.getInstance().start(getActivity());
                 break;
             case R.id.cancel:
                 pop();
@@ -167,18 +171,18 @@ public class SignUpFragment2 extends BaseVDBFragment <FragmentSignup2Binding> im
                     WonderfulToastUtils.showToast(R.string.signUp_hint_pwd_contrast);
                     return;
                 }
-
-                YunpianCaptchaUtils.getInstance(getContext()).start(getActivity());
+                if (mIsPhone){
+                    presenter.signUpByPhone(mAreacode,mAccount,edSignUpPwd,edCode,edSignUpInvitationCode);
+                }else {
+                    presenter.signUpByEmail(mAccount,edSignUpPwd,edCode,edSignUpInvitationCode);
+                }
 
                 break;
         }
     }
 
     private CountDownTimer timer;
-    private void sendCode() {
-         presenter.phoneCode(mAccount,mAreacode);
-         mDataBinding.tvYzm.setEnabled(false);
-    }
+
     private void fillCodeView(long time) {
         if (timer != null) {
             timer.cancel();
@@ -216,13 +220,14 @@ public class SignUpFragment2 extends BaseVDBFragment <FragmentSignup2Binding> im
     @Override
     public void phoneCodeFail(Integer code, String toastMessage) {
         mDataBinding.tvYzm.setEnabled(true);
-        WonderfulCodeUtils.checkedErrorCode(getmActivity(), code, toastMessage);
+  //      WonderfulToastUtils.showToast(toastMessage);
+    WonderfulCodeUtils.checkedErrorCode(getmActivity(), code, toastMessage);
     }
 
     @Override
     public void signUpByPhoneSuccess(String obj) {
         WonderfulToastUtils.showToast(obj);
-
+     ExEventBus.getDefault().startFragment(LoginFragment.newInstance());
     }
 
     @Override
@@ -234,6 +239,7 @@ public class SignUpFragment2 extends BaseVDBFragment <FragmentSignup2Binding> im
     @Override
     public void signUpByEmailSuccess(String obj) {
         WonderfulToastUtils.showToast(obj);
+        ExEventBus.getDefault().startFragment(LoginFragment.newInstance());
 
     }
 
@@ -244,21 +250,20 @@ public class SignUpFragment2 extends BaseVDBFragment <FragmentSignup2Binding> im
     }
 
     @Override
-    public void onCaptchaSuccess(YPCaptcha data) {
-        final String  edCode =mDataBinding.edCode.getText().toString().trim();
-        final String  edSignUpPwd =mDataBinding.edSignUpPwd.getText().toString().trim();
-        final String  edSignUpInvitationCode =mDataBinding.edSignUpInvitationCode.getText().toString().trim();
-
-        if (mIsPhone){
-            presenter.signUpByPhone(mAreacode,mAccount,edSignUpPwd,edCode,edSignUpInvitationCode);
-        }else {
-            presenter.signUpByEmail(mAccount,edSignUpPwd,edCode,edSignUpInvitationCode);
-        }
+    public void onCaptchaSuccess(String data) {
+        WonderfulToastUtils.showToast(data);
+        presenter.phoneCode(mAccount,mAreacode,data);
+        mDataBinding.tvYzm.setEnabled(false);
     }
 
     @Override
     public void onCaptchaFail(String msg) {
         WonderfulToastUtils.showToast(msg);
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        YunpianCaptchaUtils.getInstance().onDestroy();
     }
 }

@@ -2,6 +2,7 @@ package com.exchange.water.application.utils.okhttp.post;
 
 
 
+import com.exchange.water.application.utils.WonderfulLogUtils;
 import com.exchange.water.application.utils.okhttp.OkHttpRequest;
 
 import java.net.FileNameMap;
@@ -27,12 +28,14 @@ public class PostFormRequest extends OkHttpRequest {
         super(url, params, headers);
         this.files = files;
     }
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     @Override
     protected RequestBody buildRequestBody() {
         if (files == null || files.size() == 0) {
-            FormBody.Builder builder = new FormBody.Builder();
-            addParams(builder);
+          FormBody.Builder builder = new FormBody.Builder();
+      //      MultipartBody.Builder builder = new MultipartBody .Builder().setType(JSON);
+         addParams(builder);
             return builder.build();
         } else {
             MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
@@ -42,6 +45,8 @@ public class PostFormRequest extends OkHttpRequest {
                 RequestBody fileBody = RequestBody.create(MediaType.parse(guessMimeType(fileInput.filename)), fileInput.file);
                 builder.addFormDataPart(fileInput.key, fileInput.filename, fileBody);
             }
+
+
             return builder.build();
         }
     }

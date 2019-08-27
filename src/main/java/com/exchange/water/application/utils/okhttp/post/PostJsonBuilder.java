@@ -2,6 +2,9 @@ package com.exchange.water.application.utils.okhttp.post;
 
 
 
+import com.exchange.water.application.app.MyApplication;
+import com.exchange.water.application.utils.EncryUtils;
+import com.exchange.water.application.utils.SharedPreferenceInstance;
 import com.exchange.water.application.utils.okhttp.RequestBuilder;
 import com.exchange.water.application.utils.okhttp.RequestCall;
 
@@ -33,10 +36,14 @@ public class PostJsonBuilder extends RequestBuilder {
         this.mime = mime;
         return this;
     }
+
     @Override
     public RequestCall build() {
+        addHeader("appOrPc_type", "app");
         return new PostJsonRequest(url, params, headers, body, mime).build();
+
     }
+
 
     @Override
     public PostJsonBuilder addParams(String key, String val) {

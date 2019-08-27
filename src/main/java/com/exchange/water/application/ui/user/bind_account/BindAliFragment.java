@@ -35,7 +35,7 @@ public class BindAliFragment extends BaseTitleFragment<FragmentAliAccountBinding
         mDataBinding.btnConfirm.setOnClickListener(this);
         mDataBinding.upload.setOnClickListener(this);
         mDataBinding.imgIsInvisible.setOnClickListener(this);
-        YunpianCaptchaUtils.getInstance(getContext()).setCaptchaWindowListener(this);
+        YunpianCaptchaUtils.getInstance().setCaptchaWindowListener(this);
 
     }
 
@@ -61,14 +61,14 @@ public class BindAliFragment extends BaseTitleFragment<FragmentAliAccountBinding
 
             case R.id.btn_confirm:
 
-                YunpianCaptchaUtils.getInstance(getContext()).start(getActivity());
+                YunpianCaptchaUtils.getInstance().start(getActivity());
 
                 break;
 
         }
     }
     @Override
-    public void onCaptchaSuccess(YPCaptcha data) {
+    public void onCaptchaSuccess(String data) {
 
     }
 

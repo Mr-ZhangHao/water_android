@@ -8,6 +8,8 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.net.Uri;
 
+import com.exchange.water.application.R;
+
 import java.lang.reflect.Method;
 
 /**
@@ -25,6 +27,8 @@ public class WonderfulCommonUtils {
         ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData mClipData = ClipData.newRawUri("copyLable", Uri.parse(content));
         cm.setPrimaryClip(mClipData);
+        WonderfulToastUtils.showToast(context.getResources().getString(R.string.Successful_copy));
+
     }
 
     /**

@@ -6,7 +6,7 @@ package com.exchange.water.application.data;
 
 public interface DataSource {
 
-    void phoneCode(String phone, String mAreacode, DataCallback dataCallback);
+    void phoneCode(String phone, String mAreacode,String  check_code, DataCallback dataCallback);
     void captcha1( DataCallback dataCallback);
     void captcha2(String point , String randomId , DataCallback dataCallback);
     void YPcaptcha(String token , String authenticate , DataCallback dataCallback);

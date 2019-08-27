@@ -31,7 +31,7 @@ public class BindEmailFragment extends BaseTitleFragment<FragmentBindEmailBindin
     @Override
     protected void onBind() {
         initTitle(R.string.Security_center_modify_bingd_email);
-        YunpianCaptchaUtils.getInstance(getContext()).setCaptchaWindowListener(this);
+        YunpianCaptchaUtils.getInstance().setCaptchaWindowListener(this);
         new BindEmailPresenter(Injection.provideTasksRepository(getContext()), this);
 
         mDataBinding.btnConfirm.setOnClickListener(this);
@@ -48,12 +48,18 @@ public class BindEmailFragment extends BaseTitleFragment<FragmentBindEmailBindin
                 break;
             case R.id.btn_confirm:
 
-                YunpianCaptchaUtils.getInstance(getContext()).start(getActivity());
+                YunpianCaptchaUtils.getInstance().start(getActivity());
 
                 break;
 
         }
     }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        YunpianCaptchaUtils.getInstance().onDestroy();
+    }
+
     @Override
     protected int getLayoutRes() {
         return R.layout.fragment_bind_email;
@@ -85,7 +91,7 @@ public class BindEmailFragment extends BaseTitleFragment<FragmentBindEmailBindin
     }
 
     @Override
-    public void onCaptchaSuccess(YPCaptcha data) {
+    public void onCaptchaSuccess(String data) {
 
     }
 

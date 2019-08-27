@@ -14,13 +14,15 @@
         android:layout_marginTop="@dimen/dp10"
         android:layout_height="wrap_content">
     <LinearLayout
+        android:id="@+id/ll_email"
         style="@style/me_ll">
 
         <ImageView
             style="@style/me_ll_icon"
-            android:src="@mipmap/icon_me_aqzx" />
+            android:src="@mipmap/icon_email" />
 
         <TextView
+            android:id="@+id/tv_email"
             style="@style/me_ll_text"
             android:text="@string/contact_us_email" />
 
@@ -28,13 +30,15 @@
     </LinearLayout>
     <View style="@style/Common_line" />
         <LinearLayout
+            android:id="@+id/ll_weichat"
             style="@style/me_ll">
 
             <ImageView
                 style="@style/me_ll_icon"
-                android:src="@mipmap/icon_me_aqzx" />
+                android:src="@mipmap/icon_weichat" />
 
             <TextView
+                android:id="@+id/tv_weichat"
                 style="@style/me_ll_text"
                 android:text="@string/contact_us_weichat" />
 

@@ -33,14 +33,15 @@ public class YunpianCaptchaUtils {
     private static YunpianCaptchaUtils INSTANCE;
 
     public  OnCaptchaWindowListener onCaptchaWindowListener;
-    public YunpianCaptchaUtils(Context context) {
+    public YunpianCaptchaUtils() {
     }
 
 
-    public static YunpianCaptchaUtils getInstance(@NonNull Context context) {
+    public static YunpianCaptchaUtils getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new YunpianCaptchaUtils(context);
+            INSTANCE = new YunpianCaptchaUtils();
         }
+
         return INSTANCE;
     }
 
@@ -105,18 +106,21 @@ public class YunpianCaptchaUtils {
             @Override
             public void onError(Request request, Exception e) {
                 super.onError(request,e);
-                WonderfulLogUtils.logi("云片二次后台验证", "云片二次后台验证：" + e.getMessage());
+                WonderfulLogUtils.logi("云片二次后台验证失败", "云片二次后台验证失败：" + e.getMessage());
+                onCaptchaWindowListener.onCaptchaFail(null);
+
             }
 
             @Override
             public void onResponse(String response) {
-                WonderfulLogUtils.logi("云片二次后台验证：", "云片二次后台验证：" + response.toString());
+                WonderfulLogUtils.logi("云片二次后台验证成功：", "云片二次后台验证成功：" + response.toString());
                 try {
                     JSONObject object = new JSONObject(response);
+
                     if (object.optInt("state") == 1) {
-                        YPCaptcha obj = gson.fromJson(object.getJSONObject("state").toString(), YPCaptcha.class);
+
                         if (onCaptchaWindowListener != null) {
-                            onCaptchaWindowListener.onCaptchaSuccess(obj);
+                            onCaptchaWindowListener.onCaptchaSuccess(object.optString("msg"));
                         }
                     } else {
                         if (onCaptchaWindowListener != null) {
@@ -129,8 +133,15 @@ public class YunpianCaptchaUtils {
             }
         });
     }
+
+    public  void  onDestroy(){
+        if (INSTANCE != null) {
+            INSTANCE=null;
+        }
+    }
+
     public interface OnCaptchaWindowListener {
-        void onCaptchaSuccess(YPCaptcha data);
+        void onCaptchaSuccess(String msg);
         void onCaptchaFail(String msg);
 
     }

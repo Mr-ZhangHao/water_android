@@ -2,6 +2,7 @@ package com.exchange.water.application.utils.okhttp.post;
 
 
 
+import com.exchange.water.application.utils.WonderfulLogUtils;
 import com.exchange.water.application.utils.okhttp.OkHttpRequest;
 
 import java.util.Map;
@@ -32,6 +33,7 @@ public class PostJsonRequest extends OkHttpRequest {
 
     @Override
     protected Request buildRequest(Request.Builder builder, RequestBody requestBody) {
+
         return builder.post(requestBody).build();
     }
 }

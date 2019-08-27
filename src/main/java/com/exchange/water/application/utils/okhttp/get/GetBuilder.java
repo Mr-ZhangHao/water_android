@@ -22,8 +22,8 @@ import java.util.Set;
 public class GetBuilder extends RequestBuilder {
     @Override
     public RequestCall build() {
-        String token = EncryUtils.getInstance().decryptString(SharedPreferenceInstance.getInstance().getToken(), MyApplication.getApp().getPackageName());
-        addHeader("access-auth-token", token);
+     //   String token = EncryUtils.getInstance().decryptString(SharedPreferenceInstance.getInstance().getToken(), MyApplication.getApp().getPackageName());
+   //     addHeader("access-auth-token", token);
         if (params != null)
         {
             url = appendParams(url, params);
@@ -31,6 +31,7 @@ public class GetBuilder extends RequestBuilder {
 
         return new GetRequest(url, params, headers).build();
     }
+
 
     private String appendParams(String url, Map<String, String> params) {
         if (url == null || params == null || params.isEmpty())
@@ -46,6 +47,7 @@ public class GetBuilder extends RequestBuilder {
             builder.appendQueryParameter(key, params.get(key));
         }
         return builder.build().toString();
+
     }
 
     @Override

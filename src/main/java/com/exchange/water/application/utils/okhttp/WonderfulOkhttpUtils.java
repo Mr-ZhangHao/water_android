@@ -79,8 +79,9 @@ public class WonderfulOkhttpUtils {
     public void execute(RequestCall requestCall, Callback callback) {
         if (callback == null) callback = Callback.CALLBACK_DEFAULT;
         WonderfulLogUtils.logi("URL", requestCall.getCall().request().url().toString());
-//        WonderfulLogUtils.logi("请求头", "233"+requestCall.getCall().request().headers().toString());
+   //  WonderfulLogUtils.logi("请求头", "233"+requestCall.getCall().request().headers().toString());
         name=requestCall.getCall().request().url().toString();
+
         final Callback finalCallback = callback;
         requestCall.getCall().enqueue(new okhttp3.Callback() {
             @Override

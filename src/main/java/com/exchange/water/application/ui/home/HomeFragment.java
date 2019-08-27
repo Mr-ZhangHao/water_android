@@ -6,23 +6,21 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.library.banner.BannerLayout;
 import com.exchange.water.application.R;
-import com.exchange.water.application.adapter.BannerImageLoader;
-import com.exchange.water.application.adapter.HomeAdapter;
+import com.exchange.water.application.adapter.BannerAdapter;
 import com.exchange.water.application.adapter.HomeRankingPagerAdapter;
 import com.exchange.water.application.app.Injection;
 import com.exchange.water.application.app.UrlFactory;
-import com.exchange.water.application.base.BaseTitleFragment;
 import com.exchange.water.application.base.BaseVDBFragment;
 import com.exchange.water.application.databinding.FragmentHomeBinding;
 import com.exchange.water.application.entity.BannerEntity;
 import com.exchange.water.application.entity.Message;
-import com.exchange.water.application.main.MainContract;
+import com.exchange.water.application.main.MainActivity;
 import com.exchange.water.application.ui.home.contract.ICommonView;
 import com.exchange.water.application.ui.home.contract.MainUIContract;
 import com.exchange.water.application.ui.home.presenter.CommonPresenter;
@@ -34,9 +32,6 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sunfusheng.marqueeview.MarqueeView;
-import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
-import com.youth.banner.listener.OnBannerListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,7 +48,7 @@ import okhttp3.Request;
  * 首页
  */
 
-public class HomeFragment extends BaseTitleFragment<FragmentHomeBinding> implements MainUIContract.HomeView, ICommonView,OnTabSelectListener, ViewPager.OnPageChangeListener {
+public class HomeFragment extends BaseVDBFragment<FragmentHomeBinding> implements MainUIContract.HomeView, ICommonView,OnTabSelectListener, ViewPager.OnPageChangeListener,BannerLayout.OnBannerItemClickListener {
     private List<String> imageUrls = new ArrayList<>();
     private MainUIContract.HomePresenter mPresenter;
     private CommonPresenter commonPresenter;
@@ -67,6 +62,7 @@ public class HomeFragment extends BaseTitleFragment<FragmentHomeBinding> impleme
        // add(R.mipmap.icon_banner);
      add(R.mipmap.ic_launcher_round);
     }};
+    private BannerAdapter mBannerAdapter;
 
     public static HomeFragment newInstance() {
         Bundle args = new Bundle();
@@ -76,13 +72,12 @@ public class HomeFragment extends BaseTitleFragment<FragmentHomeBinding> impleme
     }
     @Override
     protected void onBind() {
-        initTitle("首页",false);
 
     }
     @Override
     public void onResume() {
         super.onResume();
-        mDataBinding.banner.startAutoPlay();
+
     }
 
     @Override
@@ -104,7 +99,7 @@ public class HomeFragment extends BaseTitleFragment<FragmentHomeBinding> impleme
     @Override
     public void onPause() {
         super.onPause();
-        mDataBinding.banner.stopAutoPlay();
+
     }
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
@@ -113,7 +108,8 @@ public class HomeFragment extends BaseTitleFragment<FragmentHomeBinding> impleme
         if (imageUrls == null || imageUrls.size() == 0) {
             mPresenter.banners();
         }
-     //   getMessage();
+
+        //   getMessage();
         mPagerAdapter = new HomeRankingPagerAdapter(_mActivity, getChildFragmentManager());
         mDataBinding.viewPager.setOffscreenPageLimit(4);
         mDataBinding.viewPager.setAdapter(mPagerAdapter);
@@ -136,43 +132,18 @@ public class HomeFragment extends BaseTitleFragment<FragmentHomeBinding> impleme
         for (BannerEntity bannerEntity : obj) {
             imageUrls.add(bannerEntity.getA_img_file_en());
         }
-   /*     for (int i = 0; i < obj.size() ; i++) {
-            imageUrls.add(obj.get(i).getA_img_file_en());
-
-        }*/
-        if (imageUrls.size() == 0) {
-          mDataBinding.banner.setImages(localImageUrls);
-        } else {
-            if (mDataBinding.banner == null) {
-                return;
-            }
-            mDataBinding.banner.setImages(imageUrls);
-        }
-        if (imageUrls.size() > 0) {
-            // 设置图片集合
-            mDataBinding.banner.setImages(imageUrls);
-        }
-        // 设置样式
-        mDataBinding.banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR).setIndicatorGravity(BannerConfig.CENTER)
-                .setImageLoader(new BannerImageLoader( mDataBinding.banner.getWidth(),  mDataBinding.banner.getHeight()));
-        mDataBinding.banner.setOnBannerListener(new OnBannerListener() {
+        mBannerAdapter = new BannerAdapter(getContext(),imageUrls);
+        mDataBinding.banner.setAdapter(mBannerAdapter);
+        mDataBinding.banner.setAutoPlaying(true);
+        mDataBinding.banner.setAutoPlayDuration(2000);
+        mBannerAdapter.setOnBannerItemClickListener(new BannerLayout.OnBannerItemClickListener() {
             @Override
-            public void OnBannerClick(int position) {
-                if (obj.size() == 0) {
-                    return;
-                }
-                if (!TextUtils.isEmpty(obj.get(position).getA_img_file_en())) {
-                    Intent intent = new Intent();
-                    intent.setData(Uri.parse(obj.get(position).getA_img_file_en()));
-                    intent.setAction(Intent.ACTION_VIEW);
-                    getmActivity().startActivity(intent);
-                }
+            public void onItemClick(int position) {
+                Toast.makeText(getmActivity(), "点击了第  " + position+"  项", Toast.LENGTH_SHORT).show();
             }
         });
-        //设置轮播时间
-        mDataBinding.banner.setDelayTime(3000);
-        mDataBinding.banner.start();
     }
+
 
     @Override
     public void bannersFail(Integer code, String toastMessage) {
@@ -315,6 +286,11 @@ public class HomeFragment extends BaseTitleFragment<FragmentHomeBinding> impleme
 
     @Override
     public void onTabReselect(int position) {
+
+    }
+
+    @Override
+    public void onItemClick(int position) {
 
     }
 }

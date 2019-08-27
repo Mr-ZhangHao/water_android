@@ -1,6 +1,8 @@
 package com.exchange.water.application.utils.okhttp;
 
 
+import com.exchange.water.application.utils.WonderfulLogUtils;
+
 import java.util.Map;
 
 import okhttp3.Headers;
@@ -37,6 +39,7 @@ public abstract class OkHttpRequest {
     public Request generateRequest(Callback callback) {
         RequestBody requestBody = wrapRequestBody(buildRequestBody(), callback);
         prepareBuilder();
+
         return buildRequest(builder, requestBody);
     }
 

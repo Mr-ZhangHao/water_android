@@ -37,6 +37,7 @@ import com.exchange.water.application.entity.WalletDetailNew;
 import com.exchange.water.application.utils.WonderfulLogUtils;
 import com.exchange.water.application.utils.okhttp.StringCallback;
 import com.exchange.water.application.utils.okhttp.WonderfulOkhttpUtils;
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
@@ -45,13 +46,19 @@ import org.json.JSONObject;
 
 import java.util.Currency;
 import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
+import okhttp3.MediaType;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 
 import static com.exchange.water.application.app.GlobalConstant.JSON_ERROR;
 import static com.exchange.water.application.app.GlobalConstant.OKHTTP_ERROR;
 import static com.exchange.water.application.utils.okhttp.WonderfulOkhttpUtils.get;
 import static com.exchange.water.application.utils.okhttp.WonderfulOkhttpUtils.post;
+import static com.exchange.water.application.utils.okhttp.WonderfulOkhttpUtils.postJson;
 
 
 /**
@@ -59,6 +66,7 @@ import static com.exchange.water.application.utils.okhttp.WonderfulOkhttpUtils.p
  */
 public class RemoteDataSource implements DataSource {
     private static RemoteDataSource INSTANCE;
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     public static RemoteDataSource getInstance() {
         if (INSTANCE == null) {
@@ -80,9 +88,13 @@ public class RemoteDataSource implements DataSource {
 *
 * */
     @Override
-    public void phoneCode(String phone, String mAreacode, final DataCallback dataCallback) {
-        post().url(UrlFactory.getPhoneCodeUrl())
-                .addParams("m_name", phone).addParams("Areacode", mAreacode).addParams("from", "reg")
+    public void phoneCode(String phone, String mAreacode, String  check_code,final DataCallback dataCallback) {
+        get().url(UrlFactory.getPhoneCodeUrl()+"/"+check_code+"/"+check_code+"/"+phone+"/"+"reg")
+           /*     .addParams("check_code_token", check_code)
+                .addParams("check_code", check_code)
+                .addParams("m_name", phone)
+                .addParams("from", "reg")
+                .addParams("Areacode", mAreacode)*/
                 .build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
@@ -108,7 +120,9 @@ public class RemoteDataSource implements DataSource {
             }
         });
     }
-
+    /*
+    * 不用
+    * */
     @Override
     public void captcha1(final DataCallback dataCallback) {
         post().url(UrlFactory.getcaptchaImge())
@@ -126,7 +140,7 @@ public class RemoteDataSource implements DataSource {
                 try {
                     JSONObject object = new JSONObject(response);
                     if (object.optInt("state") == 1) {
-                        Captcha1 obj = gson.fromJson(object.getJSONObject("data").toString(), Captcha1.class);
+                        Captcha1 obj = gson.fromJson(object.getJSONObject("state").toString(), Captcha1.class);
                         dataCallback.onDataLoaded(obj);
                     } else {
                         dataCallback.onDataNotAvailable(object.getInt("state"), object.optString("msg"));
@@ -138,6 +152,10 @@ public class RemoteDataSource implements DataSource {
             }
         });
     }
+
+/*
+* 不用
+* */
 
 
     @Override
@@ -170,7 +188,9 @@ public class RemoteDataSource implements DataSource {
             }
         });
     }
-
+    /*
+    * 不用
+    * */
     @Override
     public void YPcaptcha(String token, String authenticate, final DataCallback dataCallback) {
         post().url(UrlFactory.getCheckCaptcha()).addParams("token",token).addParams("authenticate",authenticate)
@@ -204,8 +224,19 @@ public class RemoteDataSource implements DataSource {
 
     @Override
     public void signUpByPhone(String mAreacode,String mAccount, String password, String mCode,String tuijianma,final DataCallback dataCallback) {
-        post().url(UrlFactory.getSignUpByPhone()).addParams("Areacode", mAreacode).addParams("m_name", mAccount).addParams("introduce_m_id", tuijianma+"")
-                .addParams("m_pwd", password).addParams("sms_code", mCode).build().execute(new StringCallback() {
+        SortedMap<String, String> params = new TreeMap<>();
+        params.put("m_name", mAccount);
+        params.put("m_pwd", password);
+        params.put("sms_code", mCode);
+        params.put("introduce_m_id", tuijianma);
+        params.put("appOrPc_type", "app");
+
+        Gson gson=new Gson();
+        String json = gson.toJson(params);
+        postJson().url(UrlFactory.getSignUpByPhone())
+                .mime(JSON)
+                .body(json)
+                .build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
                 super.onError(request,e);
@@ -233,8 +264,18 @@ public class RemoteDataSource implements DataSource {
 
     @Override
     public void signUpByEmail(String mAccount, String password, String mCode,String tuijianma, final DataCallback dataCallback) {
-        post().url(UrlFactory.getSignUpByEmail()).addParams("m_email", mAccount).addParams("introduce_m_id", tuijianma+"")
-                .addParams("m_pwd", password).addParams("email_code", mCode).addParams("Areacode", mAccount).build().execute(new StringCallback() {
+        SortedMap<String, String> params = new TreeMap<>();
+        params.put("m_email", mAccount);
+        params.put("m_pwd", password);
+        params.put("email_code", mCode);
+        params.put("introduce_m_id", tuijianma);
+        params.put("appOrPc_type", "app");
+        Gson gson=new Gson();
+        String json = gson.toJson(params);
+        postJson().url(UrlFactory.getSignUpByEmail())
+                .mime(JSON)
+                .body(json)
+                .build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
                 super.onError(request,e);
@@ -263,20 +304,31 @@ public class RemoteDataSource implements DataSource {
     @Override
     public void login(String username, String password,
                       String seccode, final DataCallback dataCallback) {
-        post().url(UrlFactory.getLoginUrl()).addParams("m_pwd", password).addParams("m_name", username).addParams("sms_code", seccode).build().execute(new StringCallback() {
+        SortedMap<String, String> params = new TreeMap<>();
+        params.put("m_name", username);
+        params.put("m_pwd", password);
+        params.put("check_code", seccode);
+        params.put("check_code_token", seccode);
+        params.put("appOrPc_type", "app");
+        Gson gson=new Gson();
+        String json = gson.toJson(params);
+        postJson().url(UrlFactory.getLoginUrl())
+                .mime(JSON)
+                .body(json).build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
                 super.onError(request,e);
                 WonderfulLogUtils.logi("登录出错", "登录出错：" + e.getMessage());
                 dataCallback.onDataNotAvailable(OKHTTP_ERROR, null);
             }
-
             @Override
             public void onResponse(String response) {
                 WonderfulLogUtils.logi("登录回执：", "登录回执：" + response.toString());
                 try {
                     JSONObject object = new JSONObject(response);
                     if (object.optInt("state") == 1) {
+
+
                         User obj = gson.fromJson(object.getJSONObject("data").toString(), User.class);
                         dataCallback.onDataLoaded(obj);
                     } else {

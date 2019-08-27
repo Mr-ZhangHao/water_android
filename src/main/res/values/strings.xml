@@ -26,6 +26,7 @@
     <string name="loading">加载中...</string>
     <string name="find_title_init">加载中</string>
     <string name="find_select_browser">选择浏览器</string>
+    <string name="Successful_copy">复制成功</string>
 
 
     <string name="select_country">选择国家或地区</string>
@@ -157,6 +158,11 @@
     <string name="contact_us_email">waterio118@gmail.com</string>
     <string name="contact_us_weichat">oisze_xtm</string>
 
-
+    <!--帮助中心-->
+    <string name="Help_submit_order">提交工单</string>
+    <string name="Help_privacy_protection">隐私保护</string>
+    <string name="Help_about_us">关于我们</string>
+    <string name="Help_terms_service">服务条款</string>
+    <string name="Help_disclaimer">免责声明</string>
 
 </resources>

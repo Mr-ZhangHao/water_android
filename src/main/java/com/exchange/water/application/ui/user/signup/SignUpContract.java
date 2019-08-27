@@ -38,7 +38,7 @@ public interface SignUpContract {
 
     interface PhonePresenter extends Contract.BasePresenter {
 
-        void phoneCode(String phone, String mAreacode);
+        void phoneCode(String phone, String mAreacode,String  check_code);
 
         void signUpByPhone(String mAreacode,String mAccount, String password, String mCode,String tuijianma);
         void signUpByEmail(String mAccount, String password, String mCode,String tuijianma);

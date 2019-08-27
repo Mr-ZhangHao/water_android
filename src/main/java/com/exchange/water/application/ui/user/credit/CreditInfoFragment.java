@@ -43,7 +43,7 @@ public class CreditInfoFragment extends BaseTitleFragment<FragmentCreditInfoBind
         mDataBinding.llUploadBefore.setOnClickListener(this);
         mDataBinding.llUploadHand.setOnClickListener(this);
         mDataBinding.tvStatusHint.setOnClickListener(this);
-        YunpianCaptchaUtils.getInstance(getContext()).setCaptchaWindowListener(this);
+        YunpianCaptchaUtils.getInstance().setCaptchaWindowListener(this);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class CreditInfoFragment extends BaseTitleFragment<FragmentCreditInfoBind
         switch (view.getId()) {
 
             case R.id.btn_submit:
-                YunpianCaptchaUtils.getInstance(getContext()).start(getActivity());
+                YunpianCaptchaUtils.getInstance().start(getActivity());
 
                 break;
             case R.id.ll_upload_after:
@@ -75,9 +75,14 @@ public class CreditInfoFragment extends BaseTitleFragment<FragmentCreditInfoBind
 
         }
     }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        YunpianCaptchaUtils.getInstance().onDestroy();
+    }
 
     @Override
-    public void onCaptchaSuccess(YPCaptcha data) {
+    public void onCaptchaSuccess(String data) {
 
     }
 

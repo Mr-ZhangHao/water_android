@@ -39,7 +39,8 @@ dependencies {
     api project(':lib-zxing')
     api project(':kchartlib')
     api project(':MPChartLib')
-    api project(':captcha')
+ //   api project(':captcha')
+    api project(':banner')
 
     api 'com.android.support:appcompat-v7:26.+'
     api 'com.android.support:design:26.+'
@@ -51,7 +52,8 @@ dependencies {
     //网络框架
     api 'org.xutils:xutils:3.5.0'
     api 'com.squareup.okhttp3:okhttp:3.9.0'
-    api 'com.github.bumptech.glide:glide:3.7.0'
+    api 'com.github.bumptech.glide:glide:4.1.1'
+
     api 'com.google.code.gson:gson:2.8.2'
     api 'com.android.support:multidex:1.0.1'
 

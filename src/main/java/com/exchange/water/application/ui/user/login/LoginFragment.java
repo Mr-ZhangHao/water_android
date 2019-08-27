@@ -35,14 +35,9 @@ import com.exchange.water.application.utils.StrUtil;
 import com.exchange.water.application.utils.WonderfulCodeUtils;
 import com.exchange.water.application.utils.WonderfulCommonUtils;
 import com.exchange.water.application.utils.WonderfulDpPxUtils;
+import com.exchange.water.application.utils.WonderfulLogUtils;
 import com.exchange.water.application.utils.WonderfulToastUtils;
 import com.exchange.water.application.utils.YunpianCaptchaUtils;
-import com.exchange.water.application.utils.captcha.CaptchaWindow;
-import com.qipeng.capatcha.QPCapatcha;
-import com.qipeng.capatcha.QPCaptchaConfig;
-import com.qipeng.capatcha.QPCaptchaListener;
-
-import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -71,6 +66,12 @@ public class LoginFragment extends BaseVDBFragment<FragmentLoginBinding> impleme
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        YunpianCaptchaUtils.getInstance().setCaptchaWindowListener(this);
+    }
+
+    @Override
     protected void onBind() {
 
         mDataBinding.btnLogin.setOnClickListener(this);
@@ -81,7 +82,6 @@ public class LoginFragment extends BaseVDBFragment<FragmentLoginBinding> impleme
         mDataBinding.forgotPassword.setOnClickListener(this);
         mDataBinding.imgIsInvisible.setOnClickListener(this);
         mDataBinding.cancel.setOnClickListener(this);
-        YunpianCaptchaUtils.getInstance(getContext()).setCaptchaWindowListener(this);
 
         int statusBarHeight = WonderfulDpPxUtils.getStatusBarHeight(getContext());
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams)mDataBinding.cancel.getLayoutParams();
@@ -285,7 +285,7 @@ public class LoginFragment extends BaseVDBFragment<FragmentLoginBinding> impleme
                 }*/
                 /*登录*/
 
-                YunpianCaptchaUtils.getInstance(getContext()).start(getActivity());
+                YunpianCaptchaUtils.getInstance().start(getActivity());
 
  /*            presenter.login(mEditAccount,mEdLoginPwd,"");*/
 
@@ -307,8 +307,12 @@ public class LoginFragment extends BaseVDBFragment<FragmentLoginBinding> impleme
     }
 
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
 
-
+        YunpianCaptchaUtils.getInstance().onDestroy();
+    }
 
     @Override
     public void onFragmentResult(int requestCode, int resultCode, Bundle data) {
@@ -332,17 +336,12 @@ public class LoginFragment extends BaseVDBFragment<FragmentLoginBinding> impleme
 
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-    }
-
-    @Override
-    public void onCaptchaSuccess(YPCaptcha data) {
-        WonderfulToastUtils.showToast(data.getMsg());
+    public void onCaptchaSuccess(String data) {
+        WonderfulLogUtils.logi("data",data);
+        WonderfulToastUtils.showToast(data);
         final String editAccount = mDataBinding.editAccount.getEditableText().toString();
         final String edLoginPwd = mDataBinding.edLoginPwd.getEditableText().toString();
-     presenter.login(editAccount,edLoginPwd,data.getMsg());
+     presenter.login(editAccount,edLoginPwd,data);
     }
 
     @Override

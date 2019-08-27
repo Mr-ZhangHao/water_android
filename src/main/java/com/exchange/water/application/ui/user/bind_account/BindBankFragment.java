@@ -41,7 +41,7 @@ public class BindBankFragment extends BaseTitleFragment<FragmentBankAccountBindi
         new BindBankPresenter(Injection.provideTasksRepository(getContext()), this);
         mDataBinding.btnConfirm.setOnClickListener(this);
         mDataBinding.imgIsInvisible.setOnClickListener(this);
-        YunpianCaptchaUtils.getInstance(getContext()).setCaptchaWindowListener(this);
+        YunpianCaptchaUtils.getInstance().setCaptchaWindowListener(this);
 
     }
     @Override
@@ -60,12 +60,19 @@ public class BindBankFragment extends BaseTitleFragment<FragmentBankAccountBindi
 
             case R.id.btn_confirm:
 
-                YunpianCaptchaUtils.getInstance(getContext()).start(getActivity());
+                YunpianCaptchaUtils.getInstance().start(getActivity());
 
                 break;
 
         }
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        YunpianCaptchaUtils.getInstance().onDestroy();
+    }
+
     @Override
     protected int getLayoutRes() {
         return R.layout.fragment_bank_account;
@@ -92,7 +99,7 @@ public class BindBankFragment extends BaseTitleFragment<FragmentBankAccountBindi
     }
 
     @Override
-    public void onCaptchaSuccess(YPCaptcha data) {
+    public void onCaptchaSuccess(String data) {
 
     }
 

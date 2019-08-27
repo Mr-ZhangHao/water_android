@@ -21,8 +21,8 @@ public class SignUpPresenter implements SignUpContract.PhonePresenter {
     }
 
     @Override
-    public void phoneCode(String phone, String country) {
-        dataRepository.phoneCode(phone, country, new DataSource.DataCallback() {
+    public void phoneCode(String phone, String country,String  check_code) {
+        dataRepository.phoneCode(phone, country,check_code, new DataSource.DataCallback() {
             @Override
             public void onDataLoaded(Object obj) {
                 view.phoneCodeSuccess((String) obj);
