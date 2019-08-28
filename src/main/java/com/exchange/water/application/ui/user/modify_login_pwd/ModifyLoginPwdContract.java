@@ -21,7 +21,7 @@ public interface ModifyLoginPwdContract {
 
     interface Presenter extends Contract.BasePresenter {
 
-        void sendEditLoginPwdCode(String token);
+        void sendEditLoginPwdCode(String phone, String data);
 
         void editPwd(String token, String oldPassword, String newPassword, String code);
     }

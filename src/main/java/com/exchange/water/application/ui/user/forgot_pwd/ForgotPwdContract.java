@@ -34,7 +34,7 @@ public interface ForgotPwdContract {
 
     interface PhonePresenter extends Contract.BasePresenter {
 
-        void phoneForgotCode(String phone, String mAreacode);
+        void phoneForgotCode(String phone, String mAreacode, String data);
 
         void forgotPwd(String account, String code, String mAreacode, String password);
 

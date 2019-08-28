@@ -5,6 +5,7 @@ import android.net.Uri;
 
 import com.exchange.water.application.app.MyApplication;
 import com.exchange.water.application.utils.EncryUtils;
+import com.exchange.water.application.utils.LogUtils;
 import com.exchange.water.application.utils.SharedPreferenceInstance;
 import com.exchange.water.application.utils.okhttp.RequestBuilder;
 import com.exchange.water.application.utils.okhttp.RequestCall;
@@ -28,6 +29,16 @@ public class GetBuilder extends RequestBuilder {
         {
             url = appendParams(url, params);
         }
+        String token;
+        if ("".equals( SharedPreferenceInstance.getInstance().getaToken())||!MyApplication.getApp().isLogin()){
+            token  = EncryUtils.getInstance().decryptString(SharedPreferenceInstance.getInstance().getToken(), MyApplication.getApp().getPackageName());
+            SharedPreferenceInstance.getInstance().saveaToken(token);
+        }else {
+            token=MyApplication.getApp().getCurrentUser().getToken();
+
+        }
+        addHeader("token", token);
+        LogUtils.e("token===",token);
 
         return new GetRequest(url, params, headers).build();
     }

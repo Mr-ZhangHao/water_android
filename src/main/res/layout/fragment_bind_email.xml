@@ -8,11 +8,56 @@
         android:layout_height="match_parent">
 
         <LinearLayout style="@style/ll_common_white">
+
+            <RelativeLayout
+                android:id="@+id/select_country"
+                style="@style/common_user_rl"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true">
+
+                    <TextView
+                        android:id="@+id/tv_country"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/signUp_china"
+                        android:textColor="@color/base_editText"
+                        android:textSize="@dimen/sp16" />
+                    <TextView
+                        android:id="@+id/tv_area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/signUp_china_area"
+                        android:textColor="@color/base_editText"
+                        android:textSize="@dimen/sp16" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:id="@+id/img_select"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_xiala" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/base_line" />
+            </RelativeLayout>
             <com.exchange.water.application.utils.widget.ClearEditTextView
                 android:id="@+id/edit_email"
                 style="@style/common_user_rl"
                 android:hint="@string/bind_email"
-                android:inputType="textEmailAddress"
                 android:textColor="@color/base_editText"
                 android:textColorHint="@color/base_hint"
                 android:theme="@style/MyEditText"

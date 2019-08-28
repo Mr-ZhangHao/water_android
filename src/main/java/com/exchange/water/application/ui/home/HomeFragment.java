@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ import com.exchange.water.application.ui.home.contract.MainUIContract;
 import com.exchange.water.application.ui.home.presenter.CommonPresenter;
 import com.exchange.water.application.ui.home.presenter.HomePresenter;
 import com.exchange.water.application.utils.SharedPreferenceInstance;
+import com.exchange.water.application.utils.WonderfulLogUtils;
 import com.exchange.water.application.utils.okhttp.StringCallback;
 import com.exchange.water.application.utils.okhttp.WonderfulOkhttpUtils;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -42,6 +45,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import okhttp3.Request;
+
+import static com.exchange.water.application.utils.okhttp.WonderfulOkhttpUtils.get;
 
 /**
  * Created by Administrator on 2019/8/15.
@@ -104,6 +109,11 @@ public class HomeFragment extends BaseVDBFragment<FragmentHomeBinding> implement
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        params.height = getStatusBarHeight();
+        mDataBinding.viewSpace.setLayoutParams(params);
+
         new HomePresenter(Injection.provideTasksRepository(getContext()),this);
         if (imageUrls == null || imageUrls.size() == 0) {
             mPresenter.banners();
@@ -111,16 +121,34 @@ public class HomeFragment extends BaseVDBFragment<FragmentHomeBinding> implement
 
         //   getMessage();
         mPagerAdapter = new HomeRankingPagerAdapter(_mActivity, getChildFragmentManager());
-        mDataBinding.viewPager.setOffscreenPageLimit(4);
-        mDataBinding.viewPager.setAdapter(mPagerAdapter);
+        mDataBinding.listViewPager.setOffscreenPageLimit(4);
+        mDataBinding.listViewPager.setAdapter(mPagerAdapter);
         if (mPagerAdapter.getTitles() != null &&
                 mPagerAdapter.getTitles().size() > 0) {
             mDataBinding.tabLayout.setTabData(mPagerAdapter.getTitles());
         }
         mDataBinding.tabLayout.setOnTabSelectListener(this);
-        mDataBinding.viewPager.addOnPageChangeListener(this);
-    }
+        mDataBinding.listViewPager.addOnPageChangeListener(this);
 
+    }
+  /*  public  void  test(){
+        get().url("http://192.168.3.136/m/googleAuthReq")
+           *//*     .addParams("account", phone)
+                .addParams("Areacode", mAreacode)
+               .addParams("from", "forgot")*//*.build().execute(new StringCallback() {
+            @Override
+            public void onError(Request request, Exception e) {
+                super.onError(request,e);
+                WonderfulLogUtils.logi("忘记密码手机验证码出错", "忘记密码手机验证码出错：" + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(String response) {
+                WonderfulLogUtils.logi("忘记密码手机验证码回执：", "忘记密码手机验证码回执：" + response.toString());
+
+            }
+        });
+    }*/
     /*
         * banner 数据
         * */
@@ -136,6 +164,7 @@ public class HomeFragment extends BaseVDBFragment<FragmentHomeBinding> implement
         mDataBinding.banner.setAdapter(mBannerAdapter);
         mDataBinding.banner.setAutoPlaying(true);
         mDataBinding.banner.setAutoPlayDuration(2000);
+
         mBannerAdapter.setOnBannerItemClickListener(new BannerLayout.OnBannerItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -280,7 +309,7 @@ public class HomeFragment extends BaseVDBFragment<FragmentHomeBinding> implement
 
     @Override
     public void onTabSelect(int position) {
-        mDataBinding.viewPager.setCurrentItem(position);
+        mDataBinding.listViewPager.setCurrentItem(position);
 
     }
 

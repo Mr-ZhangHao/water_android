@@ -15,6 +15,7 @@ import com.exchange.water.application.R;
 import com.exchange.water.application.app.Injection;
 import com.exchange.water.application.base.BaseVDBFragment;
 import com.exchange.water.application.databinding.FragmentForgotPwd2Binding;
+import com.exchange.water.application.ui.user.login.LoginFragment;
 import com.exchange.water.application.ui.user.signup.SignUpFragment2;
 import com.exchange.water.application.ui.user.signup.SignUpPresenter;
 import com.exchange.water.application.utils.StrUtil;
@@ -53,9 +54,9 @@ public class PhoneForgotFragment2 extends BaseVDBFragment <FragmentForgotPwd2Bin
     protected void onBind() {
         if (getArguments() != null) {
             mAccount = getArguments().getString(KEY_ACCOUNT);
-            mAreacode = getArguments().getString(KEY_CODE);
+            mAreacode = getArguments().getString(KEY_AREACODE);
             mIsPhone = getArguments().getBoolean(KEY_ISPHONE);
-            mCode = getArguments().getString(KEY_ISPHONE);
+            mCode = getArguments().getString(KEY_CODE);
         }
         new PhoneForgotPresenter(Injection.provideTasksRepository(getContext()), this);
         mDataBinding.cancel.setOnClickListener(this);
@@ -85,8 +86,8 @@ public class PhoneForgotFragment2 extends BaseVDBFragment <FragmentForgotPwd2Bin
 
             @Override
             public void afterTextChanged(Editable editable) {
-                final String  edSignUpPwd =mDataBinding.edSignUpPwd.getText().toString().trim();
-                final String  edSignUpConfirmPwd =mDataBinding.edSignUpConfirmPwd.getText().toString().trim();
+                final String  edSignUpPwd =mDataBinding.edSignUpPwd.getEditableText().toString().trim();
+                final String  edSignUpConfirmPwd =mDataBinding.edSignUpConfirmPwd.getEditableText().toString().trim();
                 updateUI(new Runnable() {
                     @Override
                     public void run() {
@@ -124,8 +125,8 @@ public class PhoneForgotFragment2 extends BaseVDBFragment <FragmentForgotPwd2Bin
                 break;
 
             case R.id.btn_Confirm:
-                final String  edSignUpPwd =mDataBinding.edSignUpPwd.getText().toString().trim();
-                final String  edSignUpConfirmPwd =mDataBinding.edSignUpConfirmPwd.getText().toString().trim();
+                final String  edSignUpPwd =mDataBinding.edSignUpPwd.getEditableText().toString().trim();
+                final String  edSignUpConfirmPwd =mDataBinding.edSignUpConfirmPwd.getEditableText().toString().trim();
 
                 if (TextUtils.isEmpty(mCode)) {
                     WonderfulToastUtils.showToast(getResources().getString(R.string.signUp_code_empty_hint));
@@ -138,7 +139,7 @@ public class PhoneForgotFragment2 extends BaseVDBFragment <FragmentForgotPwd2Bin
                 }
                 if (!StrUtil.check(edSignUpPwd, StrUtil.pwdCheck)) {
                     WonderfulToastUtils.showToast(getResources().getString(R.string.signUp_hint_check_pwd));
-                    mDataBinding.edSignUpConfirmPwd.requestFocus();
+                    mDataBinding.edSignUpPwd.requestFocus();
                     return;
                 }
                 if (TextUtils.isEmpty(edSignUpConfirmPwd)) {
@@ -179,12 +180,13 @@ public class PhoneForgotFragment2 extends BaseVDBFragment <FragmentForgotPwd2Bin
     @Override
     public void forgotPwdSuccess(String obj) {
         WonderfulToastUtils.showToast(obj);
-
+        setFragmentResult(RESULT_OK, null);
+        start(LoginFragment.newInstance());
     }
 
     @Override
     public void forgotPwdFail(Integer code, String toastMessage) {
-        WonderfulCodeUtils.checkedErrorCode(getmActivity(), code, toastMessage);
+        WonderfulCodeUtils.checkedErrorCode(this, code, toastMessage);
 
     }
 }

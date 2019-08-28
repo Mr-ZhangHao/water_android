@@ -199,7 +199,7 @@ public class RemoteDataSource implements DataSource {
             public void onError(Request request, Exception e) {
                 super.onError(request,e);
                 WonderfulLogUtils.logi("云片二次后台验证", "云片二次后台验证：" + e.getMessage());
-                dataCallback.onDataNotAvailable(OKHTTP_ERROR, null);
+                dataCallback.onDataNotAvailable(OKHTTP_ERROR, MyApplication.getApp().getResources().getString(R.string.code_fail));
             }
 
             @Override
@@ -250,7 +250,7 @@ public class RemoteDataSource implements DataSource {
                 try {
                     JSONObject object = new JSONObject(response);
                     if (object.optInt("state") == 1) {
-                        dataCallback.onDataLoaded("注册成功");
+                        dataCallback.onDataLoaded(MyApplication.getApp().getResources().getString(R.string.signUp_success));
                     } else {
                         dataCallback.onDataNotAvailable(object.getInt("state"), object.optString("msg"));
                     }
@@ -289,7 +289,7 @@ public class RemoteDataSource implements DataSource {
                 try {
                     JSONObject object = new JSONObject(response);
                     if (object.optInt("state") == 1) {
-                        dataCallback.onDataLoaded(object.optString("msg"));
+                        dataCallback.onDataLoaded(MyApplication.getApp().getResources().getString(R.string.signUp_success));
                     } else {
                         dataCallback.onDataNotAvailable(object.getInt("state"), object.optString("msg"));
                     }
@@ -309,12 +309,13 @@ public class RemoteDataSource implements DataSource {
         params.put("m_pwd", password);
         params.put("check_code", seccode);
         params.put("check_code_token", seccode);
-        params.put("appOrPc_type", "app");
+
         Gson gson=new Gson();
         String json = gson.toJson(params);
         postJson().url(UrlFactory.getLoginUrl())
                 .mime(JSON)
-                .body(json).build().execute(new StringCallback() {
+                .body(json).
+                build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
                 super.onError(request,e);
@@ -327,7 +328,6 @@ public class RemoteDataSource implements DataSource {
                 try {
                     JSONObject object = new JSONObject(response);
                     if (object.optInt("state") == 1) {
-
 
                         User obj = gson.fromJson(object.getJSONObject("data").toString(), User.class);
                         dataCallback.onDataLoaded(obj);
@@ -751,11 +751,23 @@ public class RemoteDataSource implements DataSource {
             }
         });
     }
-
+/*
+* 资金密码
+* */
     @Override
-    public void accountPwd(String token, String jyPassword, final DataCallback dataCallback) {
-        post().url(UrlFactory.getAccountPwdUrl()).addHeader("x-auth-token", token)
-                .addParams("jyPassword", jyPassword).build().execute(new StringCallback() {
+    public void accountPwd(String token,String Password, String code, final DataCallback dataCallback) {
+
+        SortedMap<String, String> params = new TreeMap<>();
+        params.put("token", token);
+        params.put("m_security_pwd", Password);
+        params.put("sms_code", code);
+
+        Gson gson=new Gson();
+        String json = gson.toJson(params);
+        postJson().url(UrlFactory.getAccountPwdUrl())
+                .mime(JSON)
+                .body(json)
+                .build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
                 super.onError(request,e);
@@ -768,10 +780,10 @@ public class RemoteDataSource implements DataSource {
                 WonderfulLogUtils.logi("设置资金密码回执：", "设置资金密码回执：" + response.toString());
                 try {
                     JSONObject object = new JSONObject(response);
-                    if (object.optInt("code") == 0) {
-                        dataCallback.onDataLoaded("设置成功");
+                    if (object.optInt("state") == 1) {
+                        dataCallback.onDataLoaded(MyApplication.getApp().getResources().getString(R.string.Security_asset_pwd_success));
                     } else {
-                        dataCallback.onDataNotAvailable(object.getInt("code"), object.optString("message"));
+                        dataCallback.onDataNotAvailable(object.getInt("state"), object.optString("msg"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -1268,9 +1280,17 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public void bindPhone(String token, String phone, String code, String password, final DataCallback dataCallback) {
-        post().url(UrlFactory.getBindPhoneUrl()).addHeader("x-auth-token", token)
-                .addParams("phone", phone).addParams("code", code).addParams("password", password).build().execute(new StringCallback() {
+    public void bindPhone(String token, String phone, String code,String mArea,final DataCallback dataCallback) {
+        SortedMap<String, String> params = new TreeMap<>();
+        params.put("token", token);
+        params.put("email_code", code);
+        params.put("m_email", phone);
+
+        Gson gson=new Gson();
+        String json = gson.toJson(params);
+        postJson().url(UrlFactory.getBindPhoneUrl())
+                .mime(JSON)
+                .body(json).build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
                 super.onError(request,e);
@@ -1283,10 +1303,11 @@ public class RemoteDataSource implements DataSource {
                 WonderfulLogUtils.logi("绑定手机号回执：", "绑定手机号回执：" + response.toString());
                 try {
                     JSONObject object = new JSONObject(response);
-                    if (object.optInt("code") == 0) {
-                        dataCallback.onDataLoaded("成功绑定");
+                    if (object.optInt("state") == 1) {
+                        dataCallback.onDataLoaded(MyApplication.getApp().getResources().getString(R.string.Security_bind_success));
+
                     } else {
-                        dataCallback.onDataNotAvailable(object.getInt("code"), object.optString("message"));
+                        dataCallback.onDataNotAvailable(object.getInt("state"), object.optString("msg"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -1297,8 +1318,8 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public void sendCode(String token, String phone, final DataCallback dataCallback) {
-        post().url(UrlFactory.getSendCodeUrl()).addHeader("x-auth-token", token).addParams("phone", phone).build().execute(new StringCallback() {
+    public void sendCode(String token, String phone,String are, final DataCallback dataCallback) {
+        get().url(UrlFactory.getSendCodeUrl()+"/"+phone+"/"+token+"/"+token).build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
                 super.onError(request,e);
@@ -1311,10 +1332,11 @@ public class RemoteDataSource implements DataSource {
                 WonderfulLogUtils.logi("发送绑定手机的验证码回执：", "发送绑定手机的验证码回执：" + response.toString());
                 try {
                     JSONObject object = new JSONObject(response);
-                    if (object.optInt("code") == 0) {
-                        dataCallback.onDataLoaded("发送成功");
+                    if (object.optInt("state") == 1) {
+                        dataCallback.onDataLoaded(MyApplication.getApp().getResources().getString(R.string.send_success));
+
                     } else {
-                        dataCallback.onDataNotAvailable(object.getInt("code"), object.optString("message"));
+                        dataCallback.onDataNotAvailable(object.getInt("state"), object.optString("msg"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -1325,9 +1347,19 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public void bindEmail(String token, String email, String code, String password, final DataCallback dataCallback) {
-        post().url(UrlFactory.getBindEmailUrl()).addHeader("x-auth-token", token)
-                .addParams("email", email).addParams("code", code).addParams("password", password).build().execute(new StringCallback() {
+    public void bindEmail(String token, String email, String code,  final DataCallback dataCallback) {
+
+        SortedMap<String, String> params = new TreeMap<>();
+        params.put("token", token);
+        params.put("email_code", code);
+        params.put("m_email", email);
+
+        Gson gson=new Gson();
+        String json = gson.toJson(params);
+        postJson().url(UrlFactory.getBindEmailUrl())
+                .mime(JSON)
+                .body(json)
+                .build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
                 super.onError(request,e);
@@ -1340,10 +1372,10 @@ public class RemoteDataSource implements DataSource {
                 WonderfulLogUtils.logi("绑定邮箱回执：", "绑定邮箱回执：" + response.toString());
                 try {
                     JSONObject object = new JSONObject(response);
-                    if (object.optInt("code") == 0) {
-                        dataCallback.onDataLoaded("绑定成功");
+                    if (object.optInt("state") == 1) {
+                        dataCallback.onDataLoaded(MyApplication.getApp().getResources().getString(R.string.Security_bind_success));
                     } else {
-                        dataCallback.onDataNotAvailable(object.getInt("code"), object.optString("message"));
+                        dataCallback.onDataNotAvailable(object.getInt("state"), object.optString("msg"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -1352,12 +1384,14 @@ public class RemoteDataSource implements DataSource {
             }
         });
     }
-
+    /*
+    * 绑定邮箱*/
     @Override
     public void sendEmailCode(String token, String email, final DataCallback dataCallback) {
 //        Log.i("miao","x-auth-token : "+token);
 //        Log.i("miao","email : "+email);
-        post().url(UrlFactory.getSendEmailCodeUrl()).addHeader("x-auth-token", token).addParams("email", email).build().execute(new StringCallback() {
+        get().url(UrlFactory.getSendEmailCodeUrl()+"/"+email+"/"+token+"/"+token)
+                .build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
                 super.onError(request,e);
@@ -1370,10 +1404,10 @@ public class RemoteDataSource implements DataSource {
                 WonderfulLogUtils.logi("发送绑定邮箱的验证码回执：", "发送绑定邮箱的验证码回执：" + response.toString());
                 try {
                     JSONObject object = new JSONObject(response);
-                    if (object.optInt("code") == 0) {
-                        dataCallback.onDataLoaded("发送成功");
+                    if (object.optInt("state") == 1) {
+                        dataCallback.onDataLoaded(MyApplication.getApp().getResources().getString(R.string.send_success));
                     } else {
-                        dataCallback.onDataNotAvailable(object.getInt("code"), object.optString("message"));
+                        dataCallback.onDataNotAvailable(object.getInt("state"), object.optString("msg"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -1384,24 +1418,26 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public void sendEditLoginPwdCode(String token, final DataCallback dataCallback) {
-        post().url(UrlFactory.getEditLoginPwdUrl()).addHeader("x-auth-token", token).build().execute(new StringCallback() {
+    public void sendEditLoginPwdCode(String phone, String data, final DataCallback dataCallback) {
+
+
+        get().url(UrlFactory.getEditLoginPwdUrl()+"/"+data+"/"+data+"/"+phone+"/"+"forgot").build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
                 super.onError(request,e);
-                WonderfulLogUtils.logi("发送修改登录密码出错", "发送修改登录密码出错：" + e.getMessage());
+                WonderfulLogUtils.logi("发送修改登录密码验证码出错", "发送修改登录密码验证码出错：" + e.getMessage());
                 dataCallback.onDataNotAvailable(OKHTTP_ERROR, null);
             }
 
             @Override
             public void onResponse(String response) {
-                WonderfulLogUtils.logi("发送修改登录密码回执：", "发送修改登录密码回执：" + response.toString());
+                WonderfulLogUtils.logi("发送修改登录密码验证码回执：", "发送修改登录密码验证码回执：" + response.toString());
                 try {
                     JSONObject object = new JSONObject(response);
-                    if (object.optInt("code") == 0) {
-                        dataCallback.onDataLoaded("发送成功");
+                    if (object.optInt("state") == 1) {
+                        dataCallback.onDataLoaded(MyApplication.getApp().getResources().getString(R.string.send_success));
                     } else {
-                        dataCallback.onDataNotAvailable(object.getInt("code"), object.optString("message"));
+                        dataCallback.onDataNotAvailable(object.getInt("state"), object.optString("msg"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -1413,8 +1449,17 @@ public class RemoteDataSource implements DataSource {
 
     @Override
     public void editPwd(String token, String oldPassword, String newPassword, String code, final DataCallback dataCallback) {
-        post().url(UrlFactory.getEditPwdUrl()).addHeader("x-auth-token", token)
-                .addParams("oldPassword", oldPassword).addParams("newPassword", newPassword).addParams("code", code).build().execute(new StringCallback() {
+        SortedMap<String, String> params = new TreeMap<>();
+        params.put("token", token);
+        params.put("m_pwd", newPassword);
+        params.put("m_security_pwd", oldPassword);
+        params.put("sms_code", code);
+        Gson gson=new Gson();
+        String json = gson.toJson(params);
+        postJson().url(UrlFactory.getEditPwdUrl())
+                .mime(JSON)
+                .body(json)
+                .build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
                 super.onError(request,e);
@@ -1427,10 +1472,10 @@ public class RemoteDataSource implements DataSource {
                 WonderfulLogUtils.logi("修改登录密码回执：", "修改登录密码回执：" + response.toString());
                 try {
                     JSONObject object = new JSONObject(response);
-                    if (object.optInt("code") == 0) {
-                        dataCallback.onDataLoaded("修改成功");
+                    if (object.optInt("state") == 1) {
+                        dataCallback.onDataLoaded(MyApplication.getApp().getResources().getString(R.string.change_pwd_success));
                     } else {
-                        dataCallback.onDataNotAvailable(object.getInt("code"), object.optString("message"));
+                        dataCallback.onDataNotAvailable(object.getInt("state"), object.optString("msg"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -1527,11 +1572,14 @@ public class RemoteDataSource implements DataSource {
             }
         });
     }
-
+    /*通用验证码
+    * */
     @Override
-    public void phoneForgotCode(String phone, String mAreacode, final DataCallback dataCallback) {
-        post().url(UrlFactory.getPhoneForgotPwdCodeUrl()).addParams("account", phone).addParams("Areacode", mAreacode)
-               .addParams("from", "forgot").build().execute(new StringCallback() {
+    public void phoneForgotCode(String phone, String mAreacode, String data, final DataCallback dataCallback) {
+        get().url(UrlFactory.getPhoneForgotPwdCodeUrl()+"/"+data+"/"+data+"/"+phone+"/"+"forgot")
+           /*     .addParams("account", phone)
+                .addParams("Areacode", mAreacode)
+               .addParams("from", "forgot")*/.build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
                 super.onError(request,e);
@@ -1559,8 +1607,19 @@ public class RemoteDataSource implements DataSource {
 
     @Override
     public void forgotPwd(String account, String code, String mAreacode, String password, final DataCallback dataCallback) {
-        post().url(UrlFactory.getForgotPwdUrl())
-                .addParams("m_name", account).addParams("m_pwd", password).addParams("sms_code", code).addParams("Areacode", mAreacode).build().execute(new StringCallback() {
+
+
+        SortedMap<String, String> params = new TreeMap<>();
+        params.put("m_name", account);
+        params.put("m_pwd", password);
+        params.put("sms_code", code);
+        params.put("Areacode", mAreacode);
+        Gson gson=new Gson();
+        String json = gson.toJson(params);
+        postJson().url(UrlFactory.getForgotPwdUrl())
+                .mime(JSON)
+                .body(json)
+                .build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
                 super.onError(request,e);
@@ -1988,9 +2047,18 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public void editAccountPed(String token, String newPassword, String oldPassword, final DataCallback dataCallback) {
-        post().url(UrlFactory.getEditAccountPwdUrl())
-                .addHeader("x-auth-token", token).addParams("newPassword", newPassword).addParams("oldPassword", oldPassword).build().execute(new StringCallback() {
+    public void editAccountPed(String token, String newPassword, String oldPassword,String code, final DataCallback dataCallback) {
+        SortedMap<String, String> params = new TreeMap<>();
+        params.put("token", token);
+        params.put("m_security_pwd", newPassword);
+        params.put("m_pwd", oldPassword);
+        params.put("sms_code", code);
+
+        Gson gson=new Gson();
+        String json = gson.toJson(params);
+        postJson().url(UrlFactory.getAccountPwdUrl())
+                .mime(JSON)
+                .body(json).build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
                 super.onError(request,e);
@@ -2003,10 +2071,10 @@ public class RemoteDataSource implements DataSource {
                 WonderfulLogUtils.logi("修改账户密码回执：", "修改账户密码回执：" + response.toString());
                 try {
                     JSONObject object = new JSONObject(response);
-                    if (object.optInt("code") == 0) {
-                        dataCallback.onDataLoaded("修改成功");
+                    if (object.optInt("state") == 1) {
+                        dataCallback.onDataLoaded(MyApplication.getApp().getResources().getString(R.string.Modify_asset_password_success));
                     } else {
-                        dataCallback.onDataNotAvailable(object.getInt("code"), object.optString("message"));
+                        dataCallback.onDataNotAvailable(object.getInt("state"), object.optString("msg"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

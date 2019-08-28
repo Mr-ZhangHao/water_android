@@ -18,9 +18,9 @@ public class ModifyLoginPwdPresenter implements ModifyLoginPwdContract.Presenter
     }
 
     @Override
-    public void sendEditLoginPwdCode(String token) {
+    public void sendEditLoginPwdCode(String phone, String data) {
         view.displayLoadingPopup();
-        dataRepository.sendEditLoginPwdCode(token, new DataSource.DataCallback() {
+        dataRepository.sendEditLoginPwdCode(phone,data, new DataSource.DataCallback() {
             @Override
             public void onDataLoaded(Object obj) {
                 view.hideLoadingPopup();

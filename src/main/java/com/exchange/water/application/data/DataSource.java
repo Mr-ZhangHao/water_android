@@ -45,7 +45,7 @@ public interface DataSource {
 
     void name(String token, String realName, String idCard, String idCardFront, String idCardBack, String handHeldIdCard, DataCallback dataCallback);
 
-    void accountPwd(String token, String jyPassword, DataCallback dataCallback);
+    void accountPwd(String token,String Password, String code, DataCallback dataCallback);
 
     void allAds(String token, DataCallback dataCallback);
 
@@ -79,15 +79,15 @@ public interface DataSource {
 
     void avatar(String token, String url, DataCallback dataCallback);
 
-    void bindPhone(String token, String phone, String code, String passwrd, DataCallback dataCallback);
+    void bindPhone(String token, String phone, String code, String mArea,DataCallback dataCallback);
 
-    void sendCode(String token, String phone, DataCallback dataCallback);
+    void sendCode(String token, String phone,String are, DataCallback dataCallback);
 
-    void bindEmail(String token, String email, String code, String passwrd, DataCallback dataCallback);
+    void bindEmail(String token, String email, String code, DataCallback dataCallback);
 
     void sendEmailCode(String token, String email, DataCallback dataCallback);
 
-    void sendEditLoginPwdCode(String token, DataCallback dataCallback);
+    void sendEditLoginPwdCode(String phone, String data, DataCallback dataCallback);
 
     void editPwd(String token, String oldPassword, String newPassword, String code, DataCallback dataCallback);
 
@@ -97,7 +97,7 @@ public interface DataSource {
 
     void cancleEntrust(String token, String orderId, DataCallback dataCallback);
 
-    void phoneForgotCode(String phone, String mAreacode, DataCallback dataCallback);
+    void phoneForgotCode(String phone, String mAreacode, String data, DataCallback dataCallback);
 
     void forgotPwd(String account, String code, String mAreacode, String password, DataCallback dataCallback);
 
@@ -129,7 +129,7 @@ public interface DataSource {
 
     void appeal(String token, String remark, String orderSn, DataCallback dataCallback);
 
-    void editAccountPed(String token, String newPassword, String oldPassword, DataCallback dataCallback);
+    void editAccountPed(String token, String newPassword, String oldPassword,String code, DataCallback dataCallback);
 
     void resetAccountPwd(String token, String newPassword, String code, DataCallback dataCallback);
 

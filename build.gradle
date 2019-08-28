@@ -86,6 +86,8 @@ dependencies {
 
     //云片验证
     implementation(name: 'qipeng-captcha-v1.0.1', ext: 'aar')
-
-
+    //dialog
+    api 'com.kongzue.dialog:dialog:2.4.6'
+    //适配
+    api 'me.jessyan:autosize:1.1.1'
 }

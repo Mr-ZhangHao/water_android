@@ -43,9 +43,10 @@ public class PostFormBuilder extends RequestBuilder {
             token  = EncryUtils.getInstance().decryptString(SharedPreferenceInstance.getInstance().getToken(), MyApplication.getApp().getPackageName());
             SharedPreferenceInstance.getInstance().saveaToken(token);
         }else {
-            token=SharedPreferenceInstance.getInstance().getaToken();
+            token=MyApplication.getApp().getCurrentUser().getToken();
+
         }
-        addHeader("access-auth-token", token);
+        addHeader("token", token);
         return new PostFormRequest(url, params, headers, files).build();
     }
 

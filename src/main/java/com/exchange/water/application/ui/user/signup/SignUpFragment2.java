@@ -19,6 +19,7 @@ import com.exchange.water.application.entity.YPCaptcha;
 import com.exchange.water.application.main.MainFragment;
 import com.exchange.water.application.ui.user.login.LoginFragment;
 import com.exchange.water.application.ui.user.login.LoginPresenter;
+import com.exchange.water.application.utils.AccountSettings;
 import com.exchange.water.application.utils.ExEventBus;
 import com.exchange.water.application.utils.StrUtil;
 import com.exchange.water.application.utils.WonderfulCodeUtils;
@@ -77,7 +78,30 @@ public class SignUpFragment2 extends BaseVDBFragment <FragmentSignup2Binding> im
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
+        mDataBinding.edCode.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                final String  edCode =mDataBinding.edCode.getText().toString().trim();
+                final String  edSignUpPwd =mDataBinding.edSignUpPwd.getText().toString().trim();
+                final String  edSignUpConfirmPwd =mDataBinding.edSignUpConfirmPwd.getText().toString().trim();
+                updateUI(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDataBinding.btnSignUpConfirm.setEnabled(!TextUtils.isEmpty(edCode)&&!TextUtils.isEmpty(edSignUpPwd)&&!TextUtils.isEmpty(edSignUpConfirmPwd));
+                    }
+                });
+            }
+        });
         mDataBinding.edSignUpConfirmPwd.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -221,31 +245,34 @@ public class SignUpFragment2 extends BaseVDBFragment <FragmentSignup2Binding> im
     public void phoneCodeFail(Integer code, String toastMessage) {
         mDataBinding.tvYzm.setEnabled(true);
   //      WonderfulToastUtils.showToast(toastMessage);
-    WonderfulCodeUtils.checkedErrorCode(getmActivity(), code, toastMessage);
+       WonderfulCodeUtils.checkedErrorCode(this, code, toastMessage);
     }
 
     @Override
     public void signUpByPhoneSuccess(String obj) {
         WonderfulToastUtils.showToast(obj);
-     ExEventBus.getDefault().startFragment(LoginFragment.newInstance());
+        AccountSettings.getInstance().setLastLoginAccount(mAccount);
+        setFragmentResult(RESULT_OK, null);
+        start(LoginFragment.newInstance());
     }
 
     @Override
     public void signUpByPhoneFail(Integer code, String toastMessage) {
-        WonderfulCodeUtils.checkedErrorCode(getmActivity(), code, toastMessage);
+        WonderfulCodeUtils.checkedErrorCode(this, code, toastMessage);
 
     }
 
     @Override
     public void signUpByEmailSuccess(String obj) {
         WonderfulToastUtils.showToast(obj);
-        ExEventBus.getDefault().startFragment(LoginFragment.newInstance());
-
+        AccountSettings.getInstance().setLastLoginAccount(mAccount);
+        setFragmentResult(RESULT_OK, null);
+        start(LoginFragment.newInstance());
     }
 
     @Override
     public void signUpByEmailFail(Integer code, String toastMessage) {
-        WonderfulCodeUtils.checkedErrorCode(getmActivity(), code, toastMessage);
+        WonderfulCodeUtils.checkedErrorCode(this, code, toastMessage);
 
     }
 
@@ -265,5 +292,9 @@ public class SignUpFragment2 extends BaseVDBFragment <FragmentSignup2Binding> im
     public void onDestroy() {
         super.onDestroy();
         YunpianCaptchaUtils.getInstance().onDestroy();
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
     }
 }

@@ -161,9 +161,11 @@ public class UrlFactory {
     public static String getNameUrl() {
         return host + "/uc/approve/real/name";
     }
-
+    /*
+    * 设置或修改资金密码
+    * */
     public static String getAccountPwdUrl() {
-        return host + "/uc/approve/transaction/password";
+        return host + "/m/setSecPwd";
     }
     //广告列表
     public static String getAllAdsUrl() {
@@ -226,28 +228,30 @@ public class UrlFactory {
         return host + "/uc/approve/change/avatar";
     }
 
+    /*绑定手机
+    * */
     public static String getBindPhoneUrl() {
-        return host + "/uc/approve/bind/phone";
+        return host + "/m/bindingPhone";
     }
 
     public static String getSendCodeUrl() {
-        return host + "/uc/mobile/bind/code";
+        return host + "/m/sendPhoneBinding";
     }
 
     public static String getBindEmailUrl() {
-        return host + "/uc/approve/bind/email";
+        return host + "/m/bindingmail";
     }
 
     public static String getSendEmailCodeUrl() {
-        return host + "/uc/bind/email/code";
+        return host + "/m/sendEmailBinding";
     }
 
     public static String getEditLoginPwdUrl() {
-        return host + "/uc/mobile/update/password/code";
+        return host + "/m/mail";
     }
 
     public static String getEditPwdUrl() {
-        return host + "/uc/approve/update/password";
+        return host + "/m/resetPwd";
     }
 
     public static String getPlateUrl() {
@@ -271,17 +275,17 @@ public class UrlFactory {
     public static String getCancleEntrustUrl() {
         return host + "/exchange/order/cancel/";
     }
-    //忘记密码
+    //忘记密码 验证码
     public static String getPhoneForgotPwdCodeUrl() {
-        return host + "/uc/mobile/reset/code";
+        return host + "/m/mail/";
     }
 
     public static String getEmailForgotPwdCodeUrl() {
         return host + "/uc/reset/email/code";
     }
-
+    //忘记密码 重置
     public static String getForgotPwdUrl() {
-        return host + "/uc/reset/login/password";
+        return host + "/m/forgotV2";
     }
 
     public static String getCaptchaUrl() {
@@ -294,6 +298,11 @@ public class UrlFactory {
 
     public static String getChangePhoneUrl() {
         return host + "/uc/approve/change/phone";
+    }
+
+
+    public static String getLogoutUrl() {
+        return host + "/m/member/logout";
     }
 
 
@@ -346,7 +355,7 @@ public class UrlFactory {
     }
 
     public static String getEditAccountPwdUrl() {
-        return host + "/uc/approve/update/transaction/password";
+        return host + "/m/setSecPwd";
     }
 
     public static String getResetAccountPwdUrl() {

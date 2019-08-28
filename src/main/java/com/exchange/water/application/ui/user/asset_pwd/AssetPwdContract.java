@@ -10,16 +10,24 @@ import com.exchange.water.application.base.Contract;
 public interface AssetPwdContract {
     interface View extends Contract.BaseView<Presenter> {
 
+        void sendSuccess(String obj);
+
+        void sendCodeFail(Integer code, String toastMessage);
+
         void accountPwdSuccess(String obj);
 
         void accountPwdFail(Integer code, String toastMessage);
     }
 
     interface Presenter extends Contract.BasePresenter {
-        void accountPwd(String token, String jyPassword);
+        void accountPwd(String token, String jyPassword,String code);
+        void sendCode(String phone, String data);
     }
 
     interface EditView extends Contract.BaseView<EditPresenter> {
+        void sendSuccess(String obj);
+
+        void sendCodeFail(Integer code, String toastMessage);
 
         void editAccountPedSuccess(String obj);
 
@@ -27,8 +35,9 @@ public interface AssetPwdContract {
     }
 
     interface EditPresenter extends Contract.BasePresenter {
+        void sendCode(String phone, String data);
 
-        void editAccountPed(String token, String newPassword, String oldPassword);
+        void editAccountPed(String token, String newPassword, String oldPassword,String code);
     }
 
 

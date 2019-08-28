@@ -25,15 +25,19 @@ import com.exchange.water.application.utils.WonderfulDpPxUtils;
 import com.exchange.water.application.utils.WonderfulLogUtils;
 import com.exchange.water.application.utils.WonderfulStringUtils;
 import com.exchange.water.application.utils.WonderfulToastUtils;
+import com.exchange.water.application.utils.YunpianCaptchaUtils;
 
 import org.json.JSONObject;
 
 
 
-public class PhoneForgotFragment extends BaseVDBFragment<FragmentForgotPwdBinding> implements ForgotPwdContract.PhoneView {
+public class PhoneForgotFragment extends BaseVDBFragment<FragmentForgotPwdBinding> implements ForgotPwdContract.PhoneView,YunpianCaptchaUtils.OnCaptchaWindowListener {
 
 
     private ForgotPwdContract.PhonePresenter mPresenter;
+    private String mEditAccounts;
+    private String mArea;
+
     public static PhoneForgotFragment newInstance() {
         Bundle args = new Bundle();
         PhoneForgotFragment fragment = new PhoneForgotFragment();
@@ -54,6 +58,7 @@ public class PhoneForgotFragment extends BaseVDBFragment<FragmentForgotPwdBindin
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams)mDataBinding.cancel.getLayoutParams();
         layoutParams.height = statusBarHeight;
         mDataBinding.cancel.setLayoutParams(layoutParams);
+        YunpianCaptchaUtils.getInstance().setCaptchaWindowListener(this);
     }
 
     @Override
@@ -99,48 +104,28 @@ public class PhoneForgotFragment extends BaseVDBFragment<FragmentForgotPwdBindin
     @Override
     public void phoneForgotCodeFail(Integer code, String toastMessage) {
         mDataBinding.getYzm.setEnabled(true);
-        WonderfulCodeUtils.checkedErrorCode(getmActivity(), code, toastMessage);
+        WonderfulCodeUtils.checkedErrorCode(this, code, toastMessage);
     }
 
     @Override
     public void forgotPwdSuccess(String obj) {
 
     }
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        YunpianCaptchaUtils.getInstance().onDestroy();
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+    }
     @Override
     public void forgotPwdFail(Integer code, String toastMessage) {
 
     }
     private CountDownTimer timer;
 
-    private void sendCode() {
-
-        final String editAccount = mDataBinding.editAccount.getEditableText().toString().trim();
-        final String Area = mDataBinding.tvArea.getText().toString().trim();
-
-        if (TextUtils.isEmpty(editAccount)) {
-            WonderfulToastUtils.showToast(getResources().getString(R.string.signUp_account_empty_hint));
-            mDataBinding.editAccount.requestFocus();
-            return;
-        }
-        if (type){
-            if (mDataBinding.tvArea.getText().toString().equals("+86")&&!StrUtil.check(editAccount, StrUtil.mobileCheck)) {
-                WonderfulToastUtils.showToast(getResources().getString(R.string.signUp_phone_illegal_hint));
-                mDataBinding.editAccount.requestFocus();
-                return ;
-            }
-
-        }else {
-            if (!StrUtil.check(editAccount, StrUtil.emailCheck)) {
-                WonderfulToastUtils.showToast(getResources().getString(R.string.signUp_email_illegal_hint));
-                mDataBinding.editAccount.requestFocus();
-                return ;
-            }
-        }
-       mPresenter.phoneForgotCode(editAccount,Area);
-
-        mDataBinding.getYzm.setEnabled(false);
-    }
     private void fillCodeView(long time) {
         if (timer != null) {
             timer.cancel();
@@ -149,7 +134,7 @@ public class PhoneForgotFragment extends BaseVDBFragment<FragmentForgotPwdBindin
         timer = new CountDownTimer(time, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                mDataBinding.getYzm.setText(getActivity().getResources().getString(R.string.re_send) + "（" + millisUntilFinished / 1000 + "）");
+                mDataBinding.getYzm.setText(getContext().getResources().getString(R.string.re_send) + "（" + millisUntilFinished / 1000 + "）");
             }
 
             @Override
@@ -209,8 +194,31 @@ public class PhoneForgotFragment extends BaseVDBFragment<FragmentForgotPwdBindin
 
             case R.id.get_yzm:
 
-                sendCode();
+                mEditAccounts = mDataBinding.editAccount.getEditableText().toString().trim();
+                mArea = mDataBinding.tvArea.getText().toString().trim();
 
+                if (TextUtils.isEmpty(mEditAccounts)) {
+                    WonderfulToastUtils.showToast(getResources().getString(R.string.signUp_account_empty_hint));
+                    mDataBinding.editAccount.requestFocus();
+                    return;
+                }
+                if (type){
+                    if (mDataBinding.tvArea.getText().toString().equals("+86")&&!StrUtil.check(mEditAccounts, StrUtil.mobileCheck)) {
+                        WonderfulToastUtils.showToast(getResources().getString(R.string.signUp_phone_illegal_hint));
+                        mDataBinding.editAccount.requestFocus();
+                        return ;
+                    }
+
+                }else {
+                    if (!StrUtil.check(mEditAccounts, StrUtil.emailCheck)) {
+                        WonderfulToastUtils.showToast(getResources().getString(R.string.signUp_email_illegal_hint));
+                        mDataBinding.editAccount.requestFocus();
+                        return ;
+                    }
+                }
+
+
+                 YunpianCaptchaUtils.getInstance().start(getActivity());
                 break;
             case R.id.btn_next:
                 final String editAccount = mDataBinding.editAccount.getEditableText().toString().trim();
@@ -263,5 +271,17 @@ public class PhoneForgotFragment extends BaseVDBFragment<FragmentForgotPwdBindin
 
             }
         }
+    }
+
+    @Override
+    public void onCaptchaSuccess(String msg) {
+        mPresenter.phoneForgotCode(mEditAccounts,mArea,msg);
+        mDataBinding.getYzm.setEnabled(false);
+    }
+
+    @Override
+    public void onCaptchaFail(String msg) {
+        WonderfulToastUtils.showToast(msg);
+
     }
 }

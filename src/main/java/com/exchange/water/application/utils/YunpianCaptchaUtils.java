@@ -5,6 +5,8 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
+import com.exchange.water.application.R;
+import com.exchange.water.application.app.MyApplication;
 import com.exchange.water.application.app.UrlFactory;
 import com.exchange.water.application.data.DataSource;
 import com.exchange.water.application.data.LocalDataSource;
@@ -107,7 +109,7 @@ public class YunpianCaptchaUtils {
             public void onError(Request request, Exception e) {
                 super.onError(request,e);
                 WonderfulLogUtils.logi("云片二次后台验证失败", "云片二次后台验证失败：" + e.getMessage());
-                onCaptchaWindowListener.onCaptchaFail(null);
+                onCaptchaWindowListener.onCaptchaFail( MyApplication.getApp().getResources().getString(R.string.code_fail));
 
             }
 
@@ -124,7 +126,8 @@ public class YunpianCaptchaUtils {
                         }
                     } else {
                         if (onCaptchaWindowListener != null) {
-                            onCaptchaWindowListener.onCaptchaFail(object.optString("msg"));
+                            WonderfulToastUtils.showToast(MyApplication.getApp().getResources().getString(R.string.code_fail));
+
                         }
                     }
                 } catch (JSONException e) {

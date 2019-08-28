@@ -28,14 +28,32 @@
                 android:src="@mipmap/icon_tx"
                 android:layout_marginLeft="@dimen/dp20" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp10"
-                android:text="@string/mine_login_or_registered"
-                android:textColor="@color/base_editText"
-                android:textSize="@dimen/sp18"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:text="@string/mine_login_or_registered"
+                    android:textColor="@color/base_editText"
+                    android:textSize="@dimen/sp18"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_certified"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:text="@string/mine_certified"
+                    android:layout_marginTop="@dimen/dp5"
+                    android:visibility="gone"
+                    android:textColor="@color/base_hint"
+                    android:textSize="@dimen/sp14"
+                    />
+            </LinearLayout>
+
 
 
         </LinearLayout>
@@ -236,6 +254,22 @@
                 <ImageView
                     style="@style/common_arrow"
                     android:src="@mipmap/icon_right_arrow" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tv_login_out"
+                android:layout_marginTop="@dimen/dp20"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/dp40"
+                style="@style/me_ll">
+
+
+                <TextView
+                    style="@style/me_ll_text"
+                    android:textSize="@dimen/sp18"
+                    android:text="@string/mine_sign_out" />
+
 
             </LinearLayout>
         </LinearLayout>

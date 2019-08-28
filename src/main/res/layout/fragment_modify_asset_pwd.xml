@@ -19,7 +19,7 @@
                 <EditText
                     android:id="@+id/ed_modify_old_pwd"
                     style="@style/common_edit_code"
-                    android:inputType="textPassword"
+                    android:inputType="number"
                     android:hint="@string/old_asset_password_hint" />
 
                 <CheckBox
@@ -49,7 +49,7 @@
                 <EditText
                     android:id="@+id/ed_modify_pwd"
                     style="@style/common_edit_code"
-                    android:inputType="textPassword"
+                    android:inputType="number"
                     android:hint="@string/asset_password_hint" />
 
                 <CheckBox
@@ -63,7 +63,7 @@
                 <EditText
                     android:id="@+id/ed_modify_Confirm_pwd"
                     style="@style/common_edit_code"
-                    android:inputType="textPassword"
+                    android:inputType="number"
                     android:hint="@string/signUp_hint_Confirm_pwd" />
 
                 <CheckBox

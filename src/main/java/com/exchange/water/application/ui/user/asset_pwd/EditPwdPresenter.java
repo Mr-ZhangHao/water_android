@@ -18,9 +18,9 @@ public class EditPwdPresenter implements AssetPwdContract.EditPresenter {
     }
 
     @Override
-    public void editAccountPed(String token, String newPassword, String oldPassword) {
+    public void editAccountPed(String token, String newPassword, String oldPassword,String code) {
         view.displayLoadingPopup();
-        dataRepository.editAccountPed(token, newPassword, oldPassword, new DataSource.DataCallback() {
+        dataRepository.editAccountPed(token, newPassword, oldPassword,code, new DataSource.DataCallback() {
             @Override
             public void onDataLoaded(Object obj) {
                 view.hideLoadingPopup();
@@ -31,6 +31,25 @@ public class EditPwdPresenter implements AssetPwdContract.EditPresenter {
             public void onDataNotAvailable(Integer code, String toastMessage) {
                 view.hideLoadingPopup();
                 view.editAccountPedFail(code, toastMessage);
+
+            }
+        });
+    }
+
+    @Override
+    public void sendCode(String phone, String data) {
+        view.displayLoadingPopup();
+        dataRepository.sendEditLoginPwdCode(phone,data, new DataSource.DataCallback() {
+            @Override
+            public void onDataLoaded(Object obj) {
+                view.hideLoadingPopup();
+                view.sendSuccess((String) obj);
+            }
+
+            @Override
+            public void onDataNotAvailable(Integer code, String toastMessage) {
+                view.hideLoadingPopup();
+                view.sendCodeFail(code, toastMessage);
 
             }
         });

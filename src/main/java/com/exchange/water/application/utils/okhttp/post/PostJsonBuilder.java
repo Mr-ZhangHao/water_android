@@ -4,6 +4,7 @@ package com.exchange.water.application.utils.okhttp.post;
 
 import com.exchange.water.application.app.MyApplication;
 import com.exchange.water.application.utils.EncryUtils;
+import com.exchange.water.application.utils.LogUtils;
 import com.exchange.water.application.utils.SharedPreferenceInstance;
 import com.exchange.water.application.utils.okhttp.RequestBuilder;
 import com.exchange.water.application.utils.okhttp.RequestCall;
@@ -40,6 +41,16 @@ public class PostJsonBuilder extends RequestBuilder {
     @Override
     public RequestCall build() {
         addHeader("appOrPc_type", "app");
+        String token;
+        if ("".equals( SharedPreferenceInstance.getInstance().getaToken())||!MyApplication.getApp().isLogin()){
+            token  = EncryUtils.getInstance().decryptString(SharedPreferenceInstance.getInstance().getToken(), MyApplication.getApp().getPackageName());
+            SharedPreferenceInstance.getInstance().saveaToken(token);
+        }else {
+            token=MyApplication.getApp().getCurrentUser().getToken();
+
+        }
+        addHeader("token", token);
+        LogUtils.e("token===",token);
         return new PostJsonRequest(url, params, headers, body, mime).build();
 
     }

@@ -27,12 +27,13 @@
     <string name="find_title_init">加载中</string>
     <string name="find_select_browser">选择浏览器</string>
     <string name="Successful_copy">复制成功</string>
-
+    <string name="please_login">请先登录</string>
 
     <string name="select_country">选择国家或地区</string>
 
     <!--登录-->
     <string name="login_text">登录</string>
+    <string name="login_success">登录成功</string>
     <string name="login_regist">注册</string>
     <string name="login_phone_number">手机号</string>
     <string name="login_phone_number_hint">请输入手机号</string>
@@ -53,7 +54,7 @@
     <string name="signUp_Phone">手机注册</string>
     <string name="signUp_Email">邮箱注册</string>
     <string name="signUp_Verification_code">验证码</string>
-    <string name="signUp_phone_number">手机号</string>
+    <string name="signUp_phone_number">手机号/邮箱</string>
     <string name="signUp_Email_number">邮箱</string>
     <string name="signUp_Next_step">下一步</string>
     <string name="signUp_Existing_account">已有账号？</string>
@@ -64,9 +65,13 @@
     <string name="signUp_imgcode_empty_hint">图片验证码不能为空</string>
     <string name="signUp_code_empty_hint">验证码不能为空</string>
     <string name="signUp_pwd_empty_hint">密码不能为空</string>
+    <string name="signUp_old_pwd_empty_hint">旧密码不能为空</string>
     <string name="signUp_imgcode_illegal_hint">图片验证码不正确</string>
     <string name="send_code">发送验证码</string>
+    <string name="send_success">发送成功</string>
     <string name="re_send">重新获取</string>
+    <string name="signUp_success">注册成功</string>
+    <string name="code_fail">验证失败</string>
 
     <!--设置密码-->
     <string name="signUp_set_password">设置密码</string>
@@ -88,6 +93,8 @@
     <string name="forget_phone_Mobile">手机找回</string>
     <string name="forget_email_Mobile">邮箱找回</string>
     <string name="forget_Confirm">确认</string>
+    <!--修改密码-->
+    <string name="change_pwd_success">密码修改成功</string>
 
     <!--我的-->
     <string name="mine_Security_center">安全中心</string>
@@ -98,21 +105,36 @@
     <string name="mine_Help_center">帮助中心</string>
     <string name="mine_contact_us">联系我们</string>
     <string name="mine_WATER">WATER</string>
+    <string name="mine_certified">未认证</string>
+    <string name="mine_verified">已认证</string>
+    <string name="mine_sign_out">退出登录</string>
     <string name="mine_login_or_registered">登录或注册</string>
+    <string name="me_signOut">退出登录？</string>
+    <string name="me_signOut_sure">是否确定退出账号？</string>
+    <string name="me_signOut_dropout">退出</string>
+
     <!--安全中心-->
     <string name="Security_center_modify">修改</string>
     <string name="Security_center_Setting">设置</string>
     <string name="Security_center_bind">绑定</string>
     <string name="Security_center_login_password">登录密码</string>
     <string name="Security_center_modify_bingd_email">绑定邮箱</string>
+    <string name="Security_center_modify_bingd_phone">绑定手机</string>
     <string name="Security_center_modify_asset_pwd">资金密码</string>
     <string name="Security_center_modify_Google">Google验证</string>
     <string name="bind_email">邮箱</string>
+    <string name="bind_phone">手机</string>
     <string name="Modify_Login_password">修改登录密码</string>
     <string name="set_asset_password">设置资金密码</string>
+    <string name="Modify_asset_password">修改资金密码</string>
+    <string name="Modify_asset_password_success">修改资金密码成功</string>
     <string name="asset_password_hint">密码为6位纯数字</string>
     <string name="old_login_password_hint">请输入旧密码</string>
     <string name="old_asset_password_hint">请输入当前资金密码</string>
+    <string name="Security_asset_pwd_success">设置成功</string>
+    <string name="Security_bind_success">绑定成功</string>
+
+
     <!--支付绑定-->
     <string name="bind_pay">支付绑定</string>
     <string name="bind_pay_bank">银行卡</string>

@@ -18,9 +18,9 @@ public class AssetPwdPresenter implements AssetPwdContract.Presenter {
     }
 
     @Override
-    public void accountPwd(String token, String jyPassword) {
+    public void accountPwd(String token,String Password, String code) {
         view.displayLoadingPopup();
-        dataRepository.accountPwd(token, jyPassword, new DataSource.DataCallback() {
+        dataRepository.accountPwd(token,Password, code, new DataSource.DataCallback() {
             @Override
             public void onDataLoaded(Object obj) {
                 view.hideLoadingPopup();
@@ -31,6 +31,25 @@ public class AssetPwdPresenter implements AssetPwdContract.Presenter {
             public void onDataNotAvailable(Integer code, String toastMessage) {
                 view.hideLoadingPopup();
                 view.accountPwdFail(code, toastMessage);
+
+            }
+        });
+    }
+
+    @Override
+    public void sendCode(String phone, String data) {
+        view.displayLoadingPopup();
+        dataRepository.sendEditLoginPwdCode(phone,data, new DataSource.DataCallback() {
+            @Override
+            public void onDataLoaded(Object obj) {
+                view.hideLoadingPopup();
+                view.sendSuccess((String) obj);
+            }
+
+            @Override
+            public void onDataNotAvailable(Integer code, String toastMessage) {
+                view.hideLoadingPopup();
+                view.sendCodeFail(code, toastMessage);
 
             }
         });

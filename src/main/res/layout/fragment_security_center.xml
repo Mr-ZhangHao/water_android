@@ -34,6 +34,7 @@
             style="@style/me_ll">
 
             <TextView
+                android:id="@+id/tv_bind"
                 style="@style/me_ll_text"
                 android:layout_marginLeft="@dimen/dp20"
                 android:text="@string/Security_center_modify_bingd_email" />
@@ -50,7 +51,7 @@
 
         </LinearLayout>
 
-        <View style="@style/Common_line" />
+        <View  android:id="@+id/v_bing" style="@style/Common_line" />
 
         <LinearLayout
             android:id="@+id/ll_asset_pwd"
@@ -73,7 +74,7 @@
 
         </LinearLayout>
 
-        <View style="@style/Common_line" />
+        <View  style="@style/Common_line" />
 
         <LinearLayout
             android:id="@+id/ll_Security_Google"

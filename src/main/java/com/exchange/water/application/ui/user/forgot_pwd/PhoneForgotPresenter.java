@@ -21,9 +21,9 @@ public class PhoneForgotPresenter implements ForgotPwdContract.PhonePresenter {
     }
 
     @Override
-    public void phoneForgotCode(String phone, String mAreacode) {
+    public void phoneForgotCode(String phone, String mAreacode, String data) {
         view.displayLoadingPopup();
-        dataRepository.phoneForgotCode(phone, mAreacode, new DataSource.DataCallback() {
+        dataRepository.phoneForgotCode(phone, mAreacode,data, new DataSource.DataCallback() {
             @Override
             public void onDataLoaded(Object obj) {
                 view.hideLoadingPopup();

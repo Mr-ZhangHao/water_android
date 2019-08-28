@@ -132,7 +132,7 @@ public class LocalDataSource implements DataSource {
     }
 
     @Override
-    public void accountPwd(String token, String jyPassword, DataCallback dataCallback) {
+    public void accountPwd(String token,String Password, String code, DataCallback dataCallback) {
 
     }
 
@@ -217,17 +217,17 @@ public class LocalDataSource implements DataSource {
     }
 
     @Override
-    public void bindPhone(String token, String phone, String code, String passwrd, DataCallback dataCallback) {
+    public void bindPhone(String token, String phone, String code,String mArea,DataCallback dataCallback) {
 
     }
 
     @Override
-    public void sendCode(String token, String phone, DataCallback dataCallback) {
+    public void sendCode(String token, String phone,String are, DataCallback dataCallback) {
 
     }
 
     @Override
-    public void bindEmail(String token, String email, String code, String passwrd, DataCallback dataCallback) {
+    public void bindEmail(String token, String email, String code, DataCallback dataCallback) {
 
     }
 
@@ -237,7 +237,7 @@ public class LocalDataSource implements DataSource {
     }
 
     @Override
-    public void sendEditLoginPwdCode(String token, DataCallback dataCallback) {
+    public void sendEditLoginPwdCode(String phone, String data, DataCallback dataCallback) {
 
     }
 
@@ -263,7 +263,7 @@ public class LocalDataSource implements DataSource {
     }
 
     @Override
-    public void phoneForgotCode(String phone, String mAreacode, DataCallback dataCallback) {
+    public void phoneForgotCode(String phone, String mAreacode, String data, DataCallback dataCallback) {
 
     }
 
@@ -343,7 +343,7 @@ public class LocalDataSource implements DataSource {
     }
 
     @Override
-    public void editAccountPed(String token, String newPassword, String oldPassword, DataCallback dataCallback) {
+    public void editAccountPed(String token, String newPassword, String oldPassword,String code, DataCallback dataCallback) {
 
     }
 

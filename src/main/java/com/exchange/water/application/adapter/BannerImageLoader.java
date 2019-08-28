@@ -36,6 +36,6 @@ public class BannerImageLoader extends ImageLoader {
             h = 100;
         }
 
-        Glide.with(context).load(path).transform(new CenterCrop(context),new GlideRoundTransform(context,5)).override(w, h).into(imageView);
+  //      Glide.with(context).load(path).transform(new CenterCrop(context),new GlideRoundTransform(context,5)).override(w, h).into(imageView);
     }
 }

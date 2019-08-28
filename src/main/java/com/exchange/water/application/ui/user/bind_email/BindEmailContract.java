@@ -14,14 +14,24 @@ public interface BindEmailContract {
 
         void bindEmailFail(Integer code, String toastMessage);
 
-        void sendEmailCodeSuccess(String obj);
+        void sendSuccess(String obj);
+
+        void sendCodeFail(Integer code, String toastMessage);
+        void sendEmailSuccess(String obj);
 
         void sendEmailCodeFail(Integer code, String toastMessage);
+        void bindPhoneSuccess(String obj);
+
+        void bindPhoneFail(Integer code, String toastMessage);
+
     }
 
     interface Presenter extends Contract.BasePresenter {
-        void sendEmailCode(String token, String email);
+        void sendCode(String phone,String are, String data);
+        void sendEmailCode(String phone, String data);
+        void bindEmail(String token, String phone, String code);
+        void bindPhone(String token, String phone, String code,String mArea);
 
-        void bindEmail(String token, String phone, String code, String password);
+
     }
 }

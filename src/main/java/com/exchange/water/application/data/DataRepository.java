@@ -157,9 +157,9 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public void accountPwd(String token, String jyPassword, DataCallback dataCallback) {
-        if (isLocal) mLocalDataSource.accountPwd(token, jyPassword, dataCallback);
-        else mRemoteDataSource.accountPwd(token, jyPassword, dataCallback);
+    public void accountPwd(String token,String Password, String code, DataCallback dataCallback) {
+        if (isLocal) mLocalDataSource.accountPwd(token, Password,code, dataCallback);
+        else mRemoteDataSource.accountPwd(token, Password, code,dataCallback);
     }
 
     @Override
@@ -268,21 +268,21 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public void bindPhone(String token, String phone, String code, String password, DataCallback dataCallback) {
-        if (isLocal) mLocalDataSource.bindPhone(token, phone, code, password, dataCallback);
-        else mRemoteDataSource.bindPhone(token, phone, code, password, dataCallback);
+    public void bindPhone(String token, String phone, String code, String mArea, DataCallback dataCallback) {
+        if (isLocal) mLocalDataSource.bindPhone(token, phone, code,mArea, dataCallback);
+        else mRemoteDataSource.bindPhone(token, phone, code, mArea,dataCallback);
     }
 
     @Override
-    public void sendCode(String token, String phone, DataCallback dataCallback) {
-        if (isLocal) mLocalDataSource.sendCode(token, phone, dataCallback);
-        else mRemoteDataSource.sendCode(token, phone, dataCallback);
+    public void sendCode(String token, String phone,String are, DataCallback dataCallback) {
+        if (isLocal) mLocalDataSource.sendCode(token, phone,are, dataCallback);
+        else mRemoteDataSource.sendCode(token, phone, are, dataCallback);
     }
 
     @Override
-    public void bindEmail(String token, String email, String code, String password, DataCallback dataCallback) {
-        if (isLocal) mLocalDataSource.bindEmail(token, email, code, password, dataCallback);
-        else mRemoteDataSource.bindEmail(token, email, code, password, dataCallback);
+    public void bindEmail(String token, String email, String code, DataCallback dataCallback) {
+        if (isLocal) mLocalDataSource.bindEmail(token, email, code, dataCallback);
+        else mRemoteDataSource.bindEmail(token, email, code,  dataCallback);
     }
 
     @Override
@@ -292,9 +292,9 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public void sendEditLoginPwdCode(String token, DataCallback dataCallback) {
-        if (isLocal) mLocalDataSource.sendEditLoginPwdCode(token, dataCallback);
-        else mRemoteDataSource.sendEditLoginPwdCode(token, dataCallback);
+    public void sendEditLoginPwdCode(String phone, String data, DataCallback dataCallback) {
+        if (isLocal) mLocalDataSource.sendEditLoginPwdCode(phone,data, dataCallback);
+        else mRemoteDataSource.sendEditLoginPwdCode(phone,data, dataCallback);
     }
 
     @Override
@@ -322,11 +322,11 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public void phoneForgotCode(String phone, String mAreacode, DataCallback dataCallback) {
+    public void phoneForgotCode(String phone, String mAreacode, String data, DataCallback dataCallback) {
         if (isLocal)
-            mLocalDataSource.phoneForgotCode(phone, mAreacode,  dataCallback);
+            mLocalDataSource.phoneForgotCode(phone, mAreacode,data,  dataCallback);
         else
-            mRemoteDataSource.phoneForgotCode(phone, mAreacode,  dataCallback);
+            mRemoteDataSource.phoneForgotCode(phone, mAreacode, data,  dataCallback);
     }
 
     @Override
@@ -422,9 +422,9 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public void editAccountPed(String token, String newPassword, String oldPassword, DataCallback dataCallback) {
-        if (isLocal) mLocalDataSource.editAccountPed(token, newPassword, oldPassword, dataCallback);
-        else mRemoteDataSource.editAccountPed(token, newPassword, oldPassword, dataCallback);
+    public void editAccountPed(String token, String newPassword, String oldPassword,String code, DataCallback dataCallback) {
+        if (isLocal) mLocalDataSource.editAccountPed(token, newPassword, oldPassword,code, dataCallback);
+        else mRemoteDataSource.editAccountPed(token, newPassword, oldPassword,code, dataCallback);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.exchange.water.application.ui.user.login;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.exchange.water.application.R;
 import com.exchange.water.application.app.Injection;
 import com.exchange.water.application.app.MyApplication;
+import com.exchange.water.application.app.UrlFactory;
 import com.exchange.water.application.base.BaseVDBFragment;
 import com.exchange.water.application.databinding.FragmentLoginBinding;
 import com.exchange.water.application.entity.Captcha;
@@ -38,15 +40,26 @@ import com.exchange.water.application.utils.WonderfulDpPxUtils;
 import com.exchange.water.application.utils.WonderfulLogUtils;
 import com.exchange.water.application.utils.WonderfulToastUtils;
 import com.exchange.water.application.utils.YunpianCaptchaUtils;
+import com.exchange.water.application.utils.okhttp.StringCallback;
+import com.exchange.water.application.utils.okhttp.WonderfulOkhttpUtils;
+import com.qipeng.capatcha.QPCapatcha;
+import com.qipeng.capatcha.QPCaptchaConfig;
+import com.qipeng.capatcha.QPCaptchaListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import okhttp3.Request;
+
 import static com.exchange.water.application.main.MainFragment.TYPE_NORMAL_LOGIN;
 
 
-public class LoginFragment extends BaseVDBFragment<FragmentLoginBinding> implements LoginContract.View, View.OnClickListener,YunpianCaptchaUtils.OnCaptchaWindowListener {
+
+public class LoginFragment extends BaseVDBFragment<FragmentLoginBinding> implements LoginContract.View, View.OnClickListener{
 
     private boolean type = true;
 
@@ -68,7 +81,6 @@ public class LoginFragment extends BaseVDBFragment<FragmentLoginBinding> impleme
     @Override
     public void onResume() {
         super.onResume();
-        YunpianCaptchaUtils.getInstance().setCaptchaWindowListener(this);
     }
 
     @Override
@@ -76,13 +88,12 @@ public class LoginFragment extends BaseVDBFragment<FragmentLoginBinding> impleme
 
         mDataBinding.btnLogin.setOnClickListener(this);
         mDataBinding.selectCountry.setOnClickListener(this);
-        mDataBinding.tvType.setOnClickListener(this);
+      //  mDataBinding.tvType.setOnClickListener(this);
         mDataBinding.tvYzm.setOnClickListener(this);
         mDataBinding.tvGoRegister.setOnClickListener(this);
         mDataBinding.forgotPassword.setOnClickListener(this);
         mDataBinding.imgIsInvisible.setOnClickListener(this);
         mDataBinding.cancel.setOnClickListener(this);
-
         int statusBarHeight = WonderfulDpPxUtils.getStatusBarHeight(getContext());
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams)mDataBinding.cancel.getLayoutParams();
         layoutParams.height = statusBarHeight;
@@ -150,13 +161,13 @@ public class LoginFragment extends BaseVDBFragment<FragmentLoginBinding> impleme
         SharedPreferenceInstance.getInstance().saveID(obj.getId());
         SharedPreferenceInstance.getInstance().saveTOKEN(obj.getToken());
         SharedPreferenceInstance.getInstance().saveaToken(EncryUtils.getInstance().decryptString(SharedPreferenceInstance.getInstance().getToken(), MyApplication.getApp().getPackageName()));
+        WonderfulToastUtils.showToast(getContext().getResources().getString(R.string.login_success));
         updateUI(new Runnable() {
             @Override
             public void run() {
-                start(MainFragment.newInstance(MainFragment.TYPE_NORMAL_LOGIN));
+                start(MainFragment.newInstance(MainFragment.TYPE_FAST_LOGIN));
            //     ExEventBus.getDefault().startFragment(MainFragment.newInstance(MainFragment.TYPE_NORMAL_LOGIN));
                 mDataBinding.edLoginPwd.setText("");
-
 
             }
         },  1000);
@@ -183,6 +194,8 @@ public class LoginFragment extends BaseVDBFragment<FragmentLoginBinding> impleme
             return "";
         }
     }
+
+
 
     @Override
     public void onClick(View view) {
@@ -254,7 +267,7 @@ public class LoginFragment extends BaseVDBFragment<FragmentLoginBinding> impleme
                     mDataBinding.editAccount.requestFocus();
                     return;
                 }
-                if (type){
+               /* if (type){
                     if (mDataBinding.tvArea.getText().toString().equals("+86")&&!StrUtil.check(editAccount, StrUtil.mobileCheck)) {
                         WonderfulToastUtils.showToast(getResources().getString(R.string.signUp_phone_illegal_hint));
                         mDataBinding.editAccount.requestFocus();
@@ -267,7 +280,7 @@ public class LoginFragment extends BaseVDBFragment<FragmentLoginBinding> impleme
                         mDataBinding.editAccount.requestFocus();
                         return ;
                     }
-                }
+                }*/
                 if (TextUtils.isEmpty(edLoginPwd)) {
                     WonderfulToastUtils.showToast(getResources().getString(R.string.signUp_pwd_empty_hint));
                     mDataBinding.edLoginPwd.requestFocus();
@@ -278,22 +291,15 @@ public class LoginFragment extends BaseVDBFragment<FragmentLoginBinding> impleme
                     mDataBinding.edLoginPwd.requestFocus();
                     return;
                 }
-        /*        if (TextUtils.isEmpty(edCode)) {
-                    WonderfulToastUtils.showToast(getResources().getString(R.string.signUp_code_empty_hint));
-                    mDataBinding.edCode.requestFocus();
-                    return;
-                }*/
+
                 /*登录*/
 
-                YunpianCaptchaUtils.getInstance().start(getActivity());
+                 start(getActivity());
 
- /*            presenter.login(mEditAccount,mEdLoginPwd,"");*/
 
                 break;
             case R.id.tv_go_register:
-
                 ExEventBus.getDefault().startFragment(SignUpFragment.newInstance());
-
                 break;
         }
     }
@@ -304,14 +310,6 @@ public class LoginFragment extends BaseVDBFragment<FragmentLoginBinding> impleme
                 mDataBinding.editAccount.setText(lastLoginAccount);
             }
         });
-    }
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        YunpianCaptchaUtils.getInstance().onDestroy();
     }
 
     @Override
@@ -326,7 +324,6 @@ public class LoginFragment extends BaseVDBFragment<FragmentLoginBinding> impleme
                     mDataBinding.tvArea.setText(Area);
                     mDataBinding.tvCountry.setText(countrys);
                 }
-
             }else if (requestCode == ExEventBus.MessageFragment.REQUEST_CODE_REGISTER){
                 onSetLoginAccount(AccountSettings.getInstance().getLastLoginAccount());
             }
@@ -334,19 +331,85 @@ public class LoginFragment extends BaseVDBFragment<FragmentLoginBinding> impleme
         }
     }
 
+    public  void start(final Activity activity) {
+        QPCaptchaConfig config = new QPCaptchaConfig.Builder(activity)
+                .setAlpha(0.7f)
+                //       .setLangPackModel(langPackModel)
+                .showLoadingView(true)
+                //   .setLang(langEnCb.isChecked() ? QPCaptchaConfig.LANG_EN : QPCaptchaConfig.LANG_ZH)
+                .setCallback(new QPCaptchaListener() {
+                    @Override
+                    public void onLoaded() {
+                        //  Toast.makeText(activity, "onLoaded", Toast.LENGTH_SHORT).show();
+                    }
 
-    @Override
-    public void onCaptchaSuccess(String data) {
-        WonderfulLogUtils.logi("data",data);
-        WonderfulToastUtils.showToast(data);
-        final String editAccount = mDataBinding.editAccount.getEditableText().toString();
-        final String edLoginPwd = mDataBinding.edLoginPwd.getEditableText().toString();
-     presenter.login(editAccount,edLoginPwd,data);
+                    @Override
+                    public void onSuccess(String msg) {
+                        //      Toast.makeText(activity, "onSuccess = " + msg, Toast.LENGTH_SHORT).show();
+                        try {
+                            JSONObject object = new JSONObject(msg);
+                            String token = object.optString("token");
+                            String authenticate = object.optString("authenticate");
+                        YPcaptcha(token,authenticate);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(String msg) {
+                        //   Toast.makeText(activity, "onFail msg = " + msg, Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onError(String msg) {
+                        //       Toast.makeText(activity, "onError msg = " + msg, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        //      Toast.makeText(activity, "onCancel", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .build();
+        QPCapatcha.getInstance().verify(config);
     }
 
-    @Override
-    public void onCaptchaFail(String msg) {
-        WonderfulToastUtils.showToast(msg);
+    public void YPcaptcha(String token, String authenticate) {
+        WonderfulOkhttpUtils.post().url(UrlFactory.getCheckCaptcha()).addParams("token",token).addParams("authenticate",authenticate)
+                .build().execute(new StringCallback() {
+            @Override
+            public void onError(Request request, Exception e) {
+                super.onError(request,e);
+                WonderfulLogUtils.logi("云片二次后台验证失败", "云片二次后台验证失败：" + e.getMessage());
 
+                WonderfulToastUtils.showToast(MyApplication.getApp().getResources().getString(R.string.code_fail));
+
+            }
+
+            @Override
+            public void onResponse(String response) {
+                WonderfulLogUtils.logi("云片二次后台验证成功：", "云片二次后台验证成功：" + response.toString());
+                try {
+                    JSONObject object = new JSONObject(response);
+                    String msg = object.optString("msg");
+
+                    if (object.optInt("state") == 1) {
+
+                        final String editAccount = mDataBinding.editAccount.getEditableText().toString();
+                        final String edLoginPwd = mDataBinding.edLoginPwd.getEditableText().toString();
+                        presenter.login(editAccount,edLoginPwd,msg);
+
+                    }else {
+                        WonderfulToastUtils.showToast(MyApplication.getApp().getResources().getString(R.string.code_fail));
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

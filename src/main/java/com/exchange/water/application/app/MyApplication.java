@@ -2,6 +2,7 @@ package com.exchange.water.application.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.multidex.MultiDex;
@@ -11,15 +12,23 @@ import android.widget.TextView;
 
 import com.exchange.water.application.R;
 import com.exchange.water.application.entity.User;
+import com.exchange.water.application.ui.user.login.LoginFragment;
+import com.exchange.water.application.utils.ExEventBus;
+import com.exchange.water.application.utils.SharedPreferenceInstance;
+import com.exchange.water.application.utils.WonderfulCodeUtils;
 import com.exchange.water.application.utils.WonderfulDateUtils;
 import com.exchange.water.application.utils.WonderfulFileUtils;
 import com.exchange.water.application.utils.WonderfulLogUtils;
 import com.exchange.water.application.utils.WonderfulStringUtils;
 import com.exchange.water.application.utils.WonderfulToastUtils;
+import com.exchange.water.application.utils.okhttp.StringCallback;
+import com.exchange.water.application.utils.okhttp.WonderfulOkhttpUtils;
 import com.qipeng.capatcha.QPCapatcha;
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xutils.x;
 
 import java.io.File;
@@ -30,9 +39,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Currency;
+import java.util.HashMap;
 import java.util.List;
 
 import me.yokeyword.fragmentation.Fragmentation;
+import okhttp3.Request;
+
+import static com.exchange.water.application.utils.okhttp.WonderfulOkhttpUtils.post;
 
 /**
  * Created by pc on 2017/3/8.
@@ -82,9 +95,9 @@ public class MyApplication extends Application {
         ZXingLibrary.initDisplayOpinion(this);
         getDisplayMetric();
         getCurrentUserFromFile();
-      checkInternet();
+         checkInternet();
         x.Ext.init(this);
-
+        WonderfulCodeUtils.saveErrorCode();
         Fragmentation.builder()
                 .stackViewMode(Fragmentation.NONE)
                 .debug(true)
@@ -96,6 +109,7 @@ public class MyApplication extends Application {
 
      //   UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "");
     }
+
 
     private void initView() {
         tvToast = (TextView) View.inflate(app, R.layout.my_toast, null);
@@ -138,31 +152,50 @@ public class MyApplication extends Application {
     public static MyApplication getApp() {
         return app;
     }
-/*
 
-    */
+
 /**
      * 重新登录
-     *//*
+     */
 
-    public void loginAgain(BaseActivity activity) {
+    public void loginAgain() {
         setCurrentUser(null);
         WonderfulFileUtils.getLongSaveFile(this, "User", "user.info").delete();
-        activity.startActivityForResult(new Intent(activity, LoginFragment.class), LoginFragment.RETURN_LOGIN);
+        ExEventBus.getDefault().startFragment(LoginFragment.newInstance());
     }
 
-    */
-/**
-     * 重新登录
-     *//*
+    /**
+     * 退出
+     */
 
-    public void loginAgain(Fragment fragment) {
-        setCurrentUser(null);
-        WonderfulFileUtils.getLongSaveFile(this, "User", "user.info").delete();
-        fragment.startActivityForResult(new Intent(fragment.getActivity(), LoginFragment.class), LoginFragment.RETURN_LOGIN);
+    public void loginOut() {
+        WonderfulOkhttpUtils.get().url(UrlFactory.getLogoutUrl())
+                .build().execute(new StringCallback() {
+            @Override
+            public void onError(Request request, Exception e) {
+                super.onError(request,e);
+                WonderfulLogUtils.logi("退出登录出错", "退出登录出错：" + e.getMessage());
+
+            }
+
+            @Override
+            public void onResponse(String response) {
+                WonderfulLogUtils.logi("退出登录回执：", "退出登录回执：" + response.toString());
+                try {
+                    JSONObject object = new JSONObject(response);
+                    if (object.optInt("state") == 1) {
+                        setCurrentUser(null);
+                        SharedPreferenceInstance.getInstance().saveaToken("");
+                        SharedPreferenceInstance.getInstance().saveTOKEN("");
+                        WonderfulFileUtils.getLongSaveFile(getApp(), "User", "user.info").delete();
+                        ExEventBus.getDefault().startFragment(LoginFragment.newInstance());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
-*/
-
 
     public synchronized void saveCurrentUser() {
         try {
@@ -246,5 +279,8 @@ public class MyApplication extends Application {
     public void setConnect(boolean connect) {
         isConnect = connect;
     }
+
+
+
 
 }

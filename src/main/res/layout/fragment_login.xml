@@ -4,7 +4,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/layoutBase"
-
         android:orientation="vertical"
         >
 
@@ -30,9 +29,16 @@
                     android:layout_marginLeft="@dimen/dp30"
                     android:layout_marginTop="@dimen/dp50"
                     android:text="@string/login_Phone"
+                    android:visibility="gone"
                     android:textColor="@color/base_editText"
                     android:textSize="28sp" />
-
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@mipmap/icon_tx"
+                android:layout_marginTop="@dimen/dp50"
+                />
 
                 <RelativeLayout
                     android:id="@+id/select_country"
@@ -85,7 +91,6 @@
                     android:id="@+id/edit_account"
                     style="@style/common_user_rl"
                     android:hint="@string/signUp_phone_number"
-                    android:inputType="phone"
                     android:textColor="@color/base_editText"
                     android:layout_marginTop="@dimen/dp50"
                     android:textColorHint="@color/base_hint"
@@ -141,6 +146,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/login_Email"
+                        android:visibility="gone"
                         android:textColor="@color/primaryText"
                         android:textSize="@dimen/sp14" />
                     <TextView

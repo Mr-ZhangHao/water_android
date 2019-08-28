@@ -18,9 +18,47 @@ public class BindEmailPresenter implements BindEmailContract.Presenter {
     }
 
     @Override
-    public void bindEmail(String token, String email, String code, String passwrd) {
+    public void sendCode(String phone,String are, String data) {
         view.displayLoadingPopup();
-        dataRepository.bindEmail(token, email, code, passwrd, new DataSource.DataCallback() {
+        dataRepository.sendCode(data,phone, are, new DataSource.DataCallback() {
+            @Override
+            public void onDataLoaded(Object obj) {
+                view.hideLoadingPopup();
+                view.sendSuccess((String) obj);
+            }
+
+            @Override
+            public void onDataNotAvailable(Integer code, String toastMessage) {
+                view.hideLoadingPopup();
+                view.sendCodeFail(code, toastMessage);
+
+            }
+        });
+    }
+
+    @Override
+    public void sendEmailCode(String phone, String data) {
+        view.displayLoadingPopup();
+        dataRepository.sendEmailCode(data,phone, new DataSource.DataCallback() {
+            @Override
+            public void onDataLoaded(Object obj) {
+                view.hideLoadingPopup();
+                view.sendSuccess((String) obj);
+            }
+
+            @Override
+            public void onDataNotAvailable(Integer code, String toastMessage) {
+                view.hideLoadingPopup();
+                view.sendCodeFail(code, toastMessage);
+
+            }
+        });
+    }
+
+    @Override
+    public void bindEmail(String token, String phone, String code) {
+        view.displayLoadingPopup();
+        dataRepository.bindEmail(token, phone, code, new DataSource.DataCallback() {
             @Override
             public void onDataLoaded(Object obj) {
                 view.hideLoadingPopup();
@@ -37,22 +75,23 @@ public class BindEmailPresenter implements BindEmailContract.Presenter {
     }
 
     @Override
-    public void sendEmailCode(String token, String email) {
+    public void bindPhone(String token, String phone, String code,String mArea) {
         view.displayLoadingPopup();
-        dataRepository.sendEmailCode(token, email, new DataSource.DataCallback() {
+        dataRepository.bindPhone(token, phone, code,mArea, new DataSource.DataCallback() {
             @Override
             public void onDataLoaded(Object obj) {
                 view.hideLoadingPopup();
-                view.sendEmailCodeSuccess((String) obj);
+                view.bindPhoneSuccess((String) obj);
             }
 
             @Override
             public void onDataNotAvailable(Integer code, String toastMessage) {
                 view.hideLoadingPopup();
-                view.sendEmailCodeFail(code, toastMessage);
+                view.bindPhoneFail(code, toastMessage);
 
             }
         });
     }
+
 
 }
